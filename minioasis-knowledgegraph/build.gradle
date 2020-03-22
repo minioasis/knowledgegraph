@@ -31,7 +31,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'de.codecentric:spring-boot-admin-starter-client'
 	implementation 'de.codecentric:spring-boot-admin-starter-server'
-	implementation 'org.springframework.data:spring-data-rest-hal-browser'
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
+	
+	implementation 'org.neo4j:neo4j-ogm-embedded-driver'
+	implementation 'org.neo4j:neo4j-ogm-http-driver'
+	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

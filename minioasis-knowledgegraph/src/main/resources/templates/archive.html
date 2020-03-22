@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+<body>
+
+	<div th:replace="fragments/header :: header"></div>
+	
+		<table class="table table-sm">
+			<tbody>
+				<tr>
+					<td>Title</td>
+					<td th:text="${archive.title}">Title</td>
+				</tr>
+				<tr>
+					<td>Link</td>
+					<td th:text="${archive.link}">Link</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<a href="#" th:href="@{/admin/archive/edit?id={id}(id=${archive.id})}">Edit</a>
+		<a href="#" th:href="@{/admin/archive/delete/{id}(id=${archive.id})}">Delete</a>
+
+</body>
+</html>
