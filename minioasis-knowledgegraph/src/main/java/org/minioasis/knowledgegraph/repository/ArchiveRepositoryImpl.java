@@ -26,13 +26,12 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
 	public Page<Archive> findByCriteria(ArchiveCriteria criteria, Pageable pageable) {
 		
 		String title = criteria.getTitle();
-		
 		long offset = pageable.getOffset();
-		
 		final int limit = pageable.getPageSize();
 		
-		Map<String, Object> params = new HashMap<>(1);
-        params.put ("title", ".*" + title + ".*");
+		Map<String, Object> params = new HashMap<>();
+		
+        params.put ("title", "(?i).*" + title + ".*");
         params.put ("offset", offset);
         params.put ("limit", limit);
         
