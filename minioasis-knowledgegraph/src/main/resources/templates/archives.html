@@ -48,7 +48,7 @@
 				<tr th:each="e,iterator : ${page.content}">
 					<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
 					<td th:text="${e.title}">title</td>
-					<td><a href="#" th:href="@{${e.link}}"><span th:text="${e.link}"></span></a></td>
+					<td><a href="#" th:href="@{${e.link}}" target="_blank"><span th:text="${e.link}"></span></a></td>
 					<td>
 						<a href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}">Edit</a>
 						| 
