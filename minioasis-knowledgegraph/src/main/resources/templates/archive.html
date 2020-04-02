@@ -6,7 +6,9 @@
 	</head>
 <body>
 
-	<div th:replace="fragments/header :: header"></div>
+	<div class="container pt-2">
+	
+		<div th:replace="fragments/header :: header"></div>
 	
 		<table class="table table-sm">
 			<tbody>
@@ -24,5 +26,7 @@
 		<a href="#" th:href="@{/admin/archive/edit?id={id}(id=${archive.id})}">Edit</a>
 		<a href="#" th:href="@{/admin/archive/delete/{id}(id=${archive.id})}">Delete</a>
 
+	</div>
+	
 </body>
 </html>

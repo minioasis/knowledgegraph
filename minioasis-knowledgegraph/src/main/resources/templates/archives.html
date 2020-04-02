@@ -6,7 +6,9 @@
 	</head>
 <body>
 
-	<div th:replace="fragments/header :: header"></div>
+	<div class="container pt-2">
+	
+		<div th:replace="fragments/header :: header"></div>
 
 		<form action="#" th:action="@{/admin/archive/search}" method="get">
 			<input type="hidden" id="page" name="page" value="0" />
@@ -18,22 +20,21 @@
 				<input hidden="hidden" type="submit" name="search" value="Submit"/>	
 			</div>				
 		</form>
-				
+		
+		<hr>
+
 		<div class="float-right">
-					
-			<div th:if="${pagingType eq 'search'}">
-				<a th:if="${page.hasPrevious()}" th:href="${previous}" id="previous">
-					<button type="button" class="btn btn-outline-info rounded-pill">Previous</button>
-				</a>
-				<a th:if="${page.hasNext()}" th:href="${next}" id="next">
-					<button type="button" class="btn btn-outline-info rounded-pill">Next</button>
-				</a>	
-			</div>		
+			<a th:if="${page.hasPrevious()}" th:href="${previous}" id="previous">
+				<button type="button" class="btn btn-outline-info rounded-pill">Previous</button>
+			</a>
+			<a th:if="${page.hasNext()}" th:href="${next}" id="next">
+				<button type="button" class="btn btn-outline-info rounded-pill">Next</button>
+			</a>	
 		</div>
 			
 		Total : <span th:text="${page.totalElements}">105</span>
 					
-		<table>
+		<table class="table table-sm">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -47,7 +48,7 @@
 				<tr th:each="e,iterator : ${page.content}">
 					<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
 					<td th:text="${e.title}">title</td>
-					<td th:text="${e.link}">link</td>
+					<td><a href="#" th:href="@{${e.link}}"><span th:text="${e.link}"></span></a></td>
 					<td>
 						<a href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}">Edit</a>
 						| 
@@ -63,5 +64,6 @@
 			</tbody>
 		</table>
 		
+	</div>
 </body>
 </html>

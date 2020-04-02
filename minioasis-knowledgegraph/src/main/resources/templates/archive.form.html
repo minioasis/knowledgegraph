@@ -6,24 +6,29 @@
 	</head>
 <body>
 
-	<div th:replace="fragments/header :: header"></div>
-
-	<form th:action="${#httpServletRequest.requestURI}"	th:object="${archive}" method="post">
-		<input type="text" hidden="hidden" th:field="*{id}" />
-
-		<div>
-
-			<label>Title</label> <input type="text" class="form-control" th:field="*{title}" autofocus="autofocus" placeholder="Title" />
-			<p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-
-			<label>Link</label> <input type="text" class="form-control" th:field="*{link}" placeholder="Link" />
-			<p class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></p>
-			
-			<label>&nbsp;</label> <input type="submit" value="Submit">
-
-		</div>
-
-	</form>
+	<div class="container pt-2">
+	
+		<div th:replace="fragments/header :: header"></div>
+	
+		<form th:action="${#httpServletRequest.requestURI}"	th:object="${archive}" method="post">
+			<input type="text" hidden="hidden" th:field="*{id}" />
+	
+			<div>
+	
+				<label>Title</label> <input type="text" class="form-control" th:field="*{title}" autofocus="autofocus" placeholder="Title" />
+				<p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+	
+				<label>Link</label> <input type="text" class="form-control" th:field="*{link}" placeholder="Link" />
+				<p class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></p>
+				
+				<p></p>
+				<input class="btn btn-info float-right" type="submit" value="Submit">
+	
+			</div>
+	
+		</form>
+	
+	</div>
 
 </body>
 </html>
