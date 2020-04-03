@@ -22,7 +22,7 @@ public class Archive {
 	private String ref;
 	private LocalDateTime created;
 	
-	@Relationship(type = "REFER_TO", direction = Relationship.UNDIRECTED)
+	@Relationship(type = "RELATED_TO", direction = Relationship.UNDIRECTED)
 	private List<Archive> archives = new ArrayList<Archive>();
 	
 	public Long getId() {
@@ -72,6 +72,12 @@ public class Archive {
 	}
 	public void setArchives(List<Archive> archives) {
 		this.archives = archives;
+	}
+	public void addArchive(Archive archive) {
+		this.archives.add(archive);
+	}
+	public void removeArchive(Archive archive) {
+		this.archives.remove(archive);
 	}
 
 }
