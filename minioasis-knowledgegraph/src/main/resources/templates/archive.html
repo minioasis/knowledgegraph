@@ -33,7 +33,7 @@
 							<tr th:each="e,iterator : ${archive.archives}">
 								<td th:text="${iterator.index + 1}">1</td>
 							    <td th:text="${e.title}"/>
-							    <td th:text="${e.link}"/>
+							    <td><a href="#" th:href="@{${e.link}}" target="_blank"><span th:text="${e.link}"></span></a></td>
 							    <td>
 							    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/remove.parent/{parentId}(id=${archive.id},parentId=${e.id})}">remove</a>
 							    </td>
