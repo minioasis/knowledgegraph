@@ -131,4 +131,20 @@ public class ArchiveController {
 		return "redirect:/admin/archive/" + archive.getId();
 
 	}
+	
+	@RequestMapping(value = { "/{id}/remove.parent/{parentId}" }, method = RequestMethod.GET)
+	public String removeParent(@PathVariable("id") long id, @PathVariable("parentId") long parentId, Model model) {
+
+		Archive parentArchive = this.service.findById(parentId);
+		Archive archive = this.service.findById(id);
+
+		archive.removeArchive(parentArchive);
+
+		this.service.save(archive);
+
+		model.addAttribute("archive", archive);
+
+		return "redirect:/admin/archive/" + archive.getId();
+
+	}
 }

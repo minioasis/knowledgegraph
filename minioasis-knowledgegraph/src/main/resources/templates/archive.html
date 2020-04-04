@@ -10,7 +10,7 @@
 	
 		<div th:replace="fragments/header :: header"></div>
 	
-		<table class="table table-sm">
+		<table class="table table-responsive-sm table-bordered">
 			<tbody>
 				<tr>
 					<td>Title</td>
@@ -19,6 +19,27 @@
 				<tr>
 					<td>Link</td>
 					<td th:text="${archive.link}">Link</td>
+				</tr>
+				<tr>
+					<td>Related Archives</td>
+					<td>
+						<table class="table table-responsive-sm table-bordered">
+							<tr>
+								<td>No</td>
+								<td>Title</td>
+								<td>Link</td>
+								<td>Action</td>
+							</tr>
+							<tr th:each="e,iterator : ${archive.archives}">
+								<td th:text="${iterator.index + 1}">1</td>
+							    <td th:text="${e.title}"/>
+							    <td th:text="${e.link}"/>
+							    <td>
+							    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/remove.parent/{parentId}(id=${archive.id},parentId=${e.id})}">remove</a>
+							    </td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 			</tbody>
 		</table>
