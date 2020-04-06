@@ -40,6 +40,7 @@
 					<th>#</th>
 					<th>Title</th>
 					<th>Link</th>
+					<th>created</th>
 					<th>Updated</th>
 					<th>Actions</th>
 				</tr>
@@ -54,18 +55,20 @@
 						</a>
 					</td>
 					<td>
-						<a href="#" th:href="@{${e.link}}" target="_blank">
-							<span th:text="${e.link}"></span>
+						<a class="btn btn-sm btn-outline-primary text-primary" data-toggle="tooltip" data-placement="top" th:title="${e.link}" href="#" th:href="@{${e.link}}" target="_blank">
+							<i class="fas fa-link"></i>
 						</a>
 					</td>
 					<td>
-						<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span><br>
-						<span th:text="${#temporals.format(e.updated,'<hh:MM:ss>')}"></span>
+						<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span>
 					</td>
 					<td>
-						<a href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}">Edit</a>
+						<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
+					</td>
+					<td>
+						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
 						| 
-						<a href="#" th:href="@{/admin/archive/delete/{id}(id=${e.id})}">Delete</a>		
+						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
 					</td>
 				</tr>
 				<tr th:remove="all">

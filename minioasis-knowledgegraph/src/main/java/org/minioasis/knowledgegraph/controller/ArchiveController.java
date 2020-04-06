@@ -1,5 +1,7 @@
 package org.minioasis.knowledgegraph.controller;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 
 import org.minioasis.knowledgegraph.domain.Archive;
@@ -78,6 +80,8 @@ public class ArchiveController {
 		else 
 		{
 			try{
+				
+				archive.setUpdated(LocalDateTime.now());
 				this.service.edit(archive);
 			}
 			catch (DataIntegrityViolationException eive)

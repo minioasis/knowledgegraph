@@ -17,12 +17,21 @@ public class Archive {
 	
 	private String title;
 	private String link;
-	private String desp;
+	private String summary;
 	private String content;	
-	private LocalDateTime updated = LocalDateTime.now();
+	
+    private LocalDateTime created = LocalDateTime.now();
+ 
+    private LocalDateTime updated;
+	
+	@Relationship(type = "BY", direction = Relationship.INCOMING)
+	private List<Author> authors = new ArrayList<Author>();
 	
 	@Relationship(type = "RELATED_TO", direction = Relationship.UNDIRECTED)
 	private List<Archive> archives = new ArrayList<Archive>();
+	
+	@Relationship(type = "UNDER", direction = Relationship.INCOMING)
+	private List<Category> categories = new ArrayList<Category>();
 	
 	public Long getId() {
 		return id;
@@ -42,11 +51,11 @@ public class Archive {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	public String getDesp() {
-		return desp;
+	public String getSummary() {
+		return summary;
 	}
-	public void setDesp(String desp) {
-		this.desp = desp;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 	public String getContent() {
 		return content;
@@ -54,12 +63,19 @@ public class Archive {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public LocalDateTime getCreated() {
+		return created;
+	}
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
 	public LocalDateTime getUpdated() {
 		return updated;
 	}
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
 	}
+	// archive
 	public List<Archive> getArchives() {
 		return archives;
 	}
@@ -71,6 +87,32 @@ public class Archive {
 	}
 	public void removeArchive(Archive archive) {
 		this.archives.remove(archive);
+	}
+	// author
+	public List<Author> getAuthors() {
+		return authors;
+	}
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
+	}
+	public void addAuthor(Author  author) {
+		this.authors.add(author);
+	}
+	public void removeAuthor(Author author) {
+		this.authors.remove(author);
+	}
+	// category
+	public void AddCategory(Category category) {
+		this.categories.add(category);
+	}
+	public void removeCategory(Category category) {
+		this.categories.remove(category);
+	}
+	public List<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 }
