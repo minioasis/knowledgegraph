@@ -19,8 +19,7 @@ public class Archive {
 	private String link;
 	private String desp;
 	private String content;	
-	private String ref;
-	private LocalDateTime created;
+	private LocalDateTime updated = LocalDateTime.now();
 	
 	@Relationship(type = "RELATED_TO", direction = Relationship.UNDIRECTED)
 	private List<Archive> archives = new ArrayList<Archive>();
@@ -55,17 +54,11 @@ public class Archive {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRef() {
-		return ref;
+	public LocalDateTime getUpdated() {
+		return updated;
 	}
-	public void setRef(String ref) {
-		this.ref = ref;
-	}
-	public LocalDateTime getCreated() {
-		return created;
-	}
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
+	public void setUpdated(LocalDateTime updated) {
+		this.updated = updated;
 	}
 	public List<Archive> getArchives() {
 		return archives;

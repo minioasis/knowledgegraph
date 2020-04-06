@@ -25,6 +25,10 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Updated</td>
+					<td class="font-weight-bold" th:text="${#temporals.format(archive.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
+				</tr>
+				<tr>
 					<td>Related Archives</td>
 					<td>
 						<table class="table table-responsive-sm table-bordered">

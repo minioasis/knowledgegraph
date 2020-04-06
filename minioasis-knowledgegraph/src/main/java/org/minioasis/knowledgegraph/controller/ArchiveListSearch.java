@@ -28,6 +28,10 @@ public class ArchiveListSearch {
 
 		Page<Archive> page = this.service.findAllArchives(pageable);
 		
+		for(Archive a : page.getContent()) {
+			System.out.println("***************************" + a.getUpdated());
+		}
+		
 		String next = buildUri(request, page.getNumber() + 1);
 		String previous = buildUri(request, page.getNumber() - 1);
 		

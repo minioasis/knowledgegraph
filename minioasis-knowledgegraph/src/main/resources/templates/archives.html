@@ -40,6 +40,7 @@
 					<th>#</th>
 					<th>Title</th>
 					<th>Link</th>
+					<th>Updated</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -56,6 +57,10 @@
 						<a href="#" th:href="@{${e.link}}" target="_blank">
 							<span th:text="${e.link}"></span>
 						</a>
+					</td>
+					<td>
+						<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span><br>
+						<span th:text="${#temporals.format(e.updated,'<hh:MM:ss>')}"></span>
 					</td>
 					<td>
 						<a href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}">Edit</a>
