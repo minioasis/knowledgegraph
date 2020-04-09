@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.minioasis.knowledgegraph.domain.Archive;
-import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
+import org.minioasis.knowledgegraph.domain.Doc;
+import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.neo4j.ogm.session.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,15 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
+public class DocRepositoryImpl implements DocRepositoryCustom {
 
 	private final Session session;
 
-	public ArchiveRepositoryImpl(Session session) {
+	public DocRepositoryImpl(Session session) {
 		this.session = session;
 	}
 	
-	public Page<Archive> findByCriteria(ArchiveCriteria criteria, Pageable pageable) {
+	public Page<Doc> findByCriteria(DocCriteria criteria, Pageable pageable) {
 		
 		String title = criteria.getTitle();
 		long offset = pageable.getOffset();
@@ -36,10 +36,10 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
         params.put ("limit", limit);
         
         //  Execute query and return the other side of the married relationship
-        String cypher = "MATCH (a:Archive) WHERE a.title =~ $title RETURN a ORDER BY a.title ASC SKIP $offset LIMIT $limit";
-        List <Archive> list = (List<Archive>) session.query(Archive.class, cypher, params);
+        String cypher = "MATCH (d:Doc) WHERE d.title =~ $title RETURN d ORDER BY d.title ASC SKIP $offset LIMIT $limit";
+        List <Doc> list = (List<Doc>) session.query(Doc.class, cypher, params);
         
-        String totalQuery = "MATCH (a:Archive) WHERE a.title =~ $title RETURN count(*) AS total" ;
+        String totalQuery = "MATCH (d:Doc) WHERE d.title =~ $title RETURN count(*) AS total" ;
         Iterable<Map<String, Object>>  results =  session.query(totalQuery, params);
         
         long total = 0;

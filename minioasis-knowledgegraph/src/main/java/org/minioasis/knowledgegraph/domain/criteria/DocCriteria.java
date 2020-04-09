@@ -1,6 +1,6 @@
 package org.minioasis.knowledgegraph.domain.criteria;
 
-public class ArchiveCriteria {
+public class DocCriteria {
 	
 	private String title;
 

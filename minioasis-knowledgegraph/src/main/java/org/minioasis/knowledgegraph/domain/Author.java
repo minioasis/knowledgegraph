@@ -20,7 +20,7 @@ public class Author {
 	private String website;
 	
 	@Relationship(type = "BY")
-	private List<Archive> archives = new ArrayList<Archive>();
+	private List<Doc> docs = new ArrayList<Doc>();
 	
 	public Long getId() {
 		return id;
@@ -52,18 +52,18 @@ public class Author {
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	// archive
-	public List<Archive> getArchives() {
-		return archives;
+	// doc
+	public List<Doc> getDocs() {
+		return docs;
 	}
-	public void setArchives(List<Archive> archives) {
-		this.archives = archives;
+	public void setDocs(List<Doc> docs) {
+		this.docs = docs;
 	}
-	public void addArchive(Archive archive) {
-		this.archives.add(archive);
+	public void addDoc(Doc doc) {
+		this.docs.add(doc);
 	}
-	public void removeArchive(Archive archive) {
-		this.archives.remove(archive);
+	public void removeDoc(Doc doc) {
+		this.docs.remove(doc);
 	}
 	
 }

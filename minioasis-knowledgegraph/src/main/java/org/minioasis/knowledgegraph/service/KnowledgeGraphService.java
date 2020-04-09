@@ -2,10 +2,10 @@ package org.minioasis.knowledgegraph.service;
 
 import java.util.Optional;
 
-import org.minioasis.knowledgegraph.domain.Archive;
-import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
-import org.minioasis.knowledgegraph.repository.ArchiveRepository;
-import org.minioasis.knowledgegraph.repository.ArchiveRepositoryCustom;
+import org.minioasis.knowledgegraph.domain.Doc;
+import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
+import org.minioasis.knowledgegraph.repository.DocRepository;
+import org.minioasis.knowledgegraph.repository.DocRepositoryCustom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +22,30 @@ public class KnowledgeGraphService {
 	private final static Logger LOG = LoggerFactory.getLogger(KnowledgeGraphService.class);
 	
 	@Autowired
-	private ArchiveRepository archiveRepository;
+	private DocRepository docRepository;
 	@Autowired
-	private ArchiveRepositoryCustom archiveRepositorycustom;
+	private DocRepositoryCustom docRepositorycustom;
 	
-	public void save(Archive entity) {
-		archiveRepository.save(entity);
+	public void save(Doc entity) {
+		docRepository.save(entity);
 	}
 	
-	public void edit(Archive entity) {
-		archiveRepository.save(entity);
+	public void edit(Doc entity) {
+		docRepository.save(entity);
 	}
 	
-	public void delete(Archive entity) {
-		archiveRepository.delete(entity);
+	public void delete(Doc entity) {
+		docRepository.delete(entity);
 	}
 
 	public void deleteById(Long id) {
-		archiveRepository.deleteById(id);
+		docRepository.deleteById(id);
 	}
 	
 	@Transactional(readOnly = true)
-    public Archive findById(Long id) {
+    public Doc findById(Long id) {
 		
-        Optional<Archive> entity = archiveRepository.findById(id);
+        Optional<Doc> entity = docRepository.findById(id);
         if(entity.isPresent()) {
         	return entity.get();
         }
@@ -53,16 +53,16 @@ public class KnowledgeGraphService {
     }
 	
 	@Transactional(readOnly = true)
-    public Archive findByTitle(String title) {
-        Archive result = archiveRepository.findByTitle(title);
+    public Doc findByTitle(String title) {
+        Doc result = docRepository.findByTitle(title);
         return result;
     }
 	
-	public Page<Archive> findAllArchives(Pageable pageable){
-		return archiveRepository.findAll(pageable);
+	public Page<Doc> findAllDocs(Pageable pageable){
+		return docRepository.findAll(pageable);
 	}
 	
-	public Page<Archive> findByCriteria(ArchiveCriteria criteria, Pageable pageable){
-		return archiveRepositorycustom.findByCriteria(criteria, pageable);
+	public Page<Doc> findByCriteria(DocCriteria criteria, Pageable pageable){
+		return docRepositorycustom.findByCriteria(criteria, pageable);
 	}
 }

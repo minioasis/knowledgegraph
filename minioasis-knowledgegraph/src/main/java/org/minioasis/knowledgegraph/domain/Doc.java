@@ -10,7 +10,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class Archive {
+public class Doc {
 
 	@Id @GeneratedValue
     Long id;
@@ -28,10 +28,13 @@ public class Archive {
 	private List<Author> authors = new ArrayList<Author>();
 	
 	@Relationship(type = "RELATED_TO", direction = Relationship.UNDIRECTED)
-	private List<Archive> archives = new ArrayList<Archive>();
+	private List<Doc> docs = new ArrayList<Doc>();
 	
 	@Relationship(type = "UNDER", direction = Relationship.INCOMING)
 	private List<Category> categories = new ArrayList<Category>();
+	
+	@Relationship(type = "TAGGED", direction = Relationship.INCOMING)
+	private List<Tag> tags = new ArrayList<Tag>();
 	
 	public Long getId() {
 		return id;
@@ -75,18 +78,18 @@ public class Archive {
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
 	}
-	// archive
-	public List<Archive> getArchives() {
-		return archives;
+	// doc
+	public List<Doc> getDocs() {
+		return docs;
 	}
-	public void setArchives(List<Archive> archives) {
-		this.archives = archives;
+	public void setDocs(List<Doc> docs) {
+		this.docs = docs;
 	}
-	public void addArchive(Archive archive) {
-		this.archives.add(archive);
+	public void addDoc(Doc doc) {
+		this.docs.add(doc);
 	}
-	public void removeArchive(Archive archive) {
-		this.archives.remove(archive);
+	public void removeDoc(Doc doc) {
+		this.docs.remove(doc);
 	}
 	// author
 	public List<Author> getAuthors() {
@@ -113,6 +116,12 @@ public class Archive {
 	}
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+	public List<Tag> getTags() {
+		return tags;
+	}
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
 }

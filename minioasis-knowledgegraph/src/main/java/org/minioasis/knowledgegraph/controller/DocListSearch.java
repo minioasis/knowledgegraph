@@ -2,8 +2,8 @@ package org.minioasis.knowledgegraph.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.minioasis.knowledgegraph.domain.Archive;
-import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
+import org.minioasis.knowledgegraph.domain.Doc;
+import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.service.KnowledgeGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,8 +17,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
 @Controller
-@RequestMapping("/admin/archive")
-public class ArchiveListSearch {
+@RequestMapping("/admin/doc")
+public class DocListSearch {
 
 	@Autowired
 	private KnowledgeGraphService service;
@@ -26,24 +26,24 @@ public class ArchiveListSearch {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String groups(Model model, HttpServletRequest request, Pageable pageable) {
 
-		Page<Archive> page = this.service.findAllArchives(pageable);
+		Page<Doc> page = this.service.findAllDocs(pageable);
 		
 		String next = buildUri(request, page.getNumber() + 1);
 		String previous = buildUri(request, page.getNumber() - 1);
 		
-		model.addAttribute("criteria", new ArchiveCriteria());
+		model.addAttribute("criteria", new DocCriteria());
 		model.addAttribute("next", next);
 		model.addAttribute("previous", previous);
 		model.addAttribute("page", page);
 		
-		return "archives";
+		return "docs";
 	}
 	
 	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
-	public String search(@ModelAttribute("criteria") ArchiveCriteria criteria, HttpServletRequest request, 
+	public String search(@ModelAttribute("criteria") DocCriteria criteria, HttpServletRequest request, 
 			Model model, Pageable pageable) {
 
-		Page<Archive> page = this.service.findByCriteria(criteria, pageable);
+		Page<Doc> page = this.service.findByCriteria(criteria, pageable);
 		
 		String next = buildUri(request, page.getNumber() + 1);
 		String previous = buildUri(request, page.getNumber() - 1);
@@ -52,7 +52,7 @@ public class ArchiveListSearch {
 		model.addAttribute("previous", previous);
 		model.addAttribute("page", page);
 		
-		return "archives";
+		return "docs";
 
 	}
 	

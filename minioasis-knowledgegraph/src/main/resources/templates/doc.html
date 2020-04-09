@@ -9,31 +9,41 @@
 	<div class="container pt-2">
 	
 		<div th:replace="fragments/header :: header"></div>
+
+		<div class="float-right">
+			<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/edit?id={id}(id=${doc.id})}">Edit</a>
+			<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/delete/{id}(id=${doc.id})}">Delete</a>		
+		</div>
 	
 		<table class="table table-responsive-sm table-bordered">
 			<tbody>
 				<tr>
 					<td>Title</td>
-					<td th:text="${archive.title}">Title</td>
+					<td th:text="${doc.title}">Title</td>
 				</tr>
 				<tr>
 					<td>Link</td>
 					<td>
-						<a href="#" th:href="@{${archive.link}}" target="_blank">
-							<span th:text="${archive.link}"></span>
+						<a href="#" th:href="@{${doc.link}}" target="_blank">
+							<span th:text="${doc.link}"></span>
 						</a>
 					</td>
 				</tr>
 				<tr>
 					<td>Created</td>
-					<td class="font-weight-bold" th:text="${#temporals.format(archive.created,'yyyy-MM-dd <hh:MM:ss>')}">Created</td>
+					<td class="font-weight-bold" th:text="${#temporals.format(doc.created,'yyyy-MM-dd <hh:MM:ss>')}">Created</td>
 				</tr>
 				<tr>
 					<td>Updated</td>
-					<td class="font-weight-bold" th:text="${#temporals.format(archive.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
+					<td class="font-weight-bold" th:text="${#temporals.format(doc.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
 				</tr>
 				<tr>
-					<td>Related Archives</td>
+					<td>
+						Related docs
+						<br>
+						<br>
+						<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.parent(id=${doc.id})}">Add</a>
+					</td>
 					<td>
 						<table class="table table-responsive-sm table-bordered">
 							<tr>
@@ -42,10 +52,10 @@
 								<td>Link</td>
 								<td>Action</td>
 							</tr>
-							<tr th:each="e,iterator : ${archive.archives}">
+							<tr th:each="e,iterator : ${doc.docs}">
 								<td th:text="${iterator.index + 1}">1</td>
 							    <td>
-							    	<a href="#" th:href="@{/admin/archive/{id}(id=${e.id})}">
+							    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
 							    		<span th:text="${e.title}"></span>
 							    	</a>
 							    </td>
@@ -55,7 +65,7 @@
 							    	</a>
 							    </td>
 							    <td>
-							    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/remove.parent/{parentId}(id=${archive.id},parentId=${e.id})}">remove</a>
+							    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/remove.parent/{parentId}(id=${doc.id},parentId=${e.id})}">remove</a>
 							    </td>
 							</tr>
 						</table>
@@ -63,10 +73,6 @@
 				</tr>
 			</tbody>
 		</table>
-		
-		<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/archive/edit?id={id}(id=${archive.id})}">Edit</a>
-		<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/archive/delete/{id}(id=${archive.id})}">Delete</a>
-		<a class="btn btn-info rounded-pill float-right" href="#" th:href="@{/admin/archive/{id}/add.parent(id=${archive.id})}">Add Parent</a>
 
 	</div>
 	

@@ -10,7 +10,7 @@
 	
 		<div th:replace="fragments/header :: header"></div>
 	
-		<form th:action="${#httpServletRequest.requestURI}"	th:object="${archive}" method="post">
+		<form th:action="${#httpServletRequest.requestURI}"	th:object="${doc}" method="post">
 			<input type="text" hidden="hidden" th:field="*{id}" />
 	
 			<div>

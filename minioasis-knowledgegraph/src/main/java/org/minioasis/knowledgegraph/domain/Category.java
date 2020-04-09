@@ -1,9 +1,7 @@
 package org.minioasis.knowledgegraph.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
@@ -26,7 +24,7 @@ public class Category {
 	private List<Category> childrens = new ArrayList<Category>();
 	
 	@Relationship(type = "UNDER")
-	private Set<Archive> archives = new HashSet<Archive>();
+	private List<Doc> docs = new ArrayList<Doc>();
 
 	public Long getId() {
 		return id;
@@ -65,18 +63,18 @@ public class Category {
 	public void removeChildren(Category children) {
 		this.childrens.remove(children);
 	}
-	// archive
-	public void addArchive(Archive archive) {
-		this.archives.add(archive);
+	// doc
+	public List<Doc> getDocs() {
+		return docs;
 	}
-	public Set<Archive> getArchives() {
-		return archives;
+	public void setDocs(List<Doc> docs) {
+		this.docs = docs;
 	}
-	public void setArchives(Set<Archive> archives) {
-		this.archives = archives;
+	public void addDoc(Doc doc) {
+		this.docs.add(doc);
 	}
-	public void removeArchive(Archive archive) {
-		this.archives.remove(archive);
+	public void removeDoc(Doc doc) {
+		this.docs.remove(doc);
 	}
 	
 }

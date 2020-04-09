@@ -14,18 +14,18 @@
 			<tbody>
 				<tr>
 					<td>Title</td>
-					<td th:text="${archive.title}">Title</td>
+					<td th:text="${doc.title}">Title</td>
 				</tr>
 				<tr>
 					<td>Link</td>
-					<td th:text="${archive.link}">Link</td>
+					<td th:text="${doc.link}">Link</td>
 				</tr>
 			</tbody>
 		</table>
 		
 		<h3>Add Parent</h3>
 		
-		<form action="#" th:action="@{/admin/archive/{id}/search.parent(id=${archive.id})}" method="get">
+		<form action="#" th:action="@{/admin/doc/{id}/search.parent(id=${doc.id})}" method="get">
 			<input type="hidden" id="page" name="page" value="0" />
 			<input type="hidden" id="size" name="size" value="10" />
 			<input type="hidden" id="sort" name="sort" value="title,asc" />
@@ -40,9 +40,9 @@
 
 		Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
 		
-		<form id="add_parent_form" action="#" th:action="@{/admin/archive/add.parent}" method="post">
+		<form id="add_parent_form" action="#" th:action="@{/admin/doc/add.parent}" method="post">
 		
-			<input hidden="hidden" type="text" name="archiveId"  th:value="${archive.id}"/>
+			<input hidden="hidden" type="text" name="docId"  th:value="${doc.id}"/>
 			<input id="parentId" hidden="hidden" type="text" name="parentId" value=""/>
 			
 			<script> 

@@ -10,7 +10,7 @@
 	
 		<div th:replace="fragments/header :: header"></div>
 
-		<form action="#" th:action="@{/admin/archive/search}" method="get">
+		<form action="#" th:action="@{/admin/doc/search}" method="get">
 			<input type="hidden" id="page" name="page" value="0" />
 			<input type="hidden" id="size" name="size" value="10" />
 			<input type="hidden" id="sort" name="sort" value="title,asc" />
@@ -34,7 +34,7 @@
 			
 		Total : <span th:text="${page.totalElements}">105</span>
 					
-		<table class="table table-responsive-sm table-striped">
+		<table class="table table-responsive-sm">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -50,7 +50,7 @@
 				<tr th:each="e,iterator : ${page.content}">
 					<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
 					<td>
-						<a href="#" th:href="@{/admin/archive/{id}(id=${e.id})}">
+						<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
 							<span th:text="${e.title}"></span>
 						</a>
 					</td>
@@ -66,9 +66,9 @@
 						<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
 					</td>
 					<td>
-						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
+						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
 						| 
-						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
+						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
 					</td>
 				</tr>
 				<tr th:remove="all">
