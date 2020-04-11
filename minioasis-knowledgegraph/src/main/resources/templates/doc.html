@@ -43,19 +43,19 @@
 						<td>
 							Tags
 							<br>
-							<br>
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.tag(id=${doc.id})}">Add</a>
 						</td>
 						<td>
 							<span th:each="tag : ${doc.tags}">
-								<code th:text="${tag.name}"></code>,
+								<a href="#" th:href="@{/admin/tag/{id}(id=${tag.id})}">
+									<code th:text="${tag.name}"></code>,
+								</a>
 							</span>		
 						</td>
 					</tr>
 					<tr>
 						<td>
 							Related docs
-							<br>
 							<br>
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.related(id=${doc.id})}">Add</a>
 						</td>

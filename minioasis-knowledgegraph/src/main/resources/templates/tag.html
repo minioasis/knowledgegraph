@@ -20,7 +20,41 @@
 			<table class="table table-responsive-sm table-bordered">		
 				<tbody>
 					<tr>
+						<td>Name</td>
 						<td th:text="${tag.name}">Name</td>
+					</tr>
+					<tr>
+						<td>
+							Docs
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/tag/{id}/add.doc(id=${tag.id})}">Add</a>
+						</td>
+						<td>
+							<table class="table table-responsive-sm table-bordered">
+								<tr>
+									<td>No</td>
+									<td>Title</td>
+									<td>Link</td>
+									<td>Action</td>
+								</tr>
+								<tr th:each="e,iterator : ${tag.docs}">
+									<td th:text="${iterator.index + 1}">1</td>
+								    <td>
+								    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
+								    		<span th:text="${e.title}"></span>
+								    	</a>
+								    </td>
+								    <td>
+								    	<a href="#" th:href="@{${e.link}}" target="_blank">
+								    		<span th:text="${e.link}"></span>
+								    	</a>
+								    </td>
+								    <td>
+								    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/tag/{id}/remove.doc/{docId}(id=${tag.id},docId=${e.id})}">remove</a>
+								    </td>
+								</tr>
+							</table>
+						</td>
 					</tr>
 				</tbody>
 			</table>

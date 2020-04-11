@@ -89,4 +89,19 @@ public class TagController {
 			
 		}
 	}
+	
+	@RequestMapping(value = { "/{id}/remove.doc/{docId}" }, method = RequestMethod.GET)
+	public String removeRelated(@PathVariable("id") long id, @PathVariable("docId") long docId, Model model) {
+
+		Doc doc = this.service.findDocById(docId);
+		Tag tag = this.service.findTagById(id);
+
+		tag.removeDoc(doc);
+
+		this.service.save(tag);
+
+		return "redirect:/admin/tag/" + tag.getId();
+
+	}
+	
 }
