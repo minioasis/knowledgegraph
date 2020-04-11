@@ -120,6 +120,7 @@ public class Doc {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
+	// tag
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -132,11 +133,18 @@ public class Doc {
 	public void  removeTag(Tag tag) {
 		this.tags.remove(tag);
 	}
+	// archive
 	public List<Archive> getArchives() {
 		return archives;
 	}
 	public void setArchives(List<Archive> archives) {
 		this.archives = archives;
+	}
+	public void addArchive(Archive archive) {
+		this.archives.add(archive);
+	}
+	public void removeArchive(Archive archive) {
+		this.archives.remove(archive);
 	}
 
 }

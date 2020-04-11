@@ -11,11 +11,16 @@
 					Minioasis Knowledge Graph
 				</a>
 			</h2>
-			
+			<a class="btn btn-outline-light text-info" href="#" th:href="@{/admin/archive/save}">
+				<i class="fas fa-archive fa-2x"></i>
+			</a>
+			<a class="btn btn-outline-light text-info" href="#" th:href="@{/admin/archive/list(page=0,size=10,sort='created,desc')}">
+				<i class="fas fa-search fa-2x"></i>
+			</a>
+			|
 			<a class="btn btn-outline-light text-info" href="#" th:href="@{/admin/doc/save}">
 				<i class="far fa-file-alt fa-2x"></i>
 			</a>
-			|
 			<a class="btn btn-outline-light text-info" href="#" th:href="@{/admin/doc/list(page=0,size=10,sort='created,desc')}">
 				<i class="fas fa-search fa-2x"></i>
 			</a>
@@ -23,7 +28,6 @@
 			<a class="btn btn-outline-light text-info" href="#" th:href="@{/admin/tag/save}">
 				<i class="fas fa-tag fa-2x"></i>
 			</a>
-			|
 			<a class="btn btn-outline-light text-info" href="#" th:href="@{/admin/tag/list(page=0,size=10,sort='name,asc')}">
 				<i class="fas fa-search fa-2x"></i>
 			</a>

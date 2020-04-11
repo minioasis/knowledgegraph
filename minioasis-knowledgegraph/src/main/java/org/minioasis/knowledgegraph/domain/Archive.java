@@ -1,5 +1,6 @@
 package org.minioasis.knowledgegraph.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,14 @@ public class Archive {
 	@Id
 	@GeneratedValue
 	Long id;
-	private String title;
-	private String desp;
+	private String archiveNo;
+	private String name;
+	private String content;
+	private LocalDate created;
+	private LocalDate updated;
 	
 	@Relationship(type = "OF", direction = Relationship.INCOMING)
-	private List<Doc> tags = new ArrayList<Doc>();
+	private List<Doc> docs = new ArrayList<Doc>();
 
 	public Long getId() {
 		return id;
@@ -26,23 +30,49 @@ public class Archive {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+	public String getArchiveNo() {
+		return archiveNo;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setArchiveNo(String archiveNo) {
+		this.archiveNo = archiveNo;
 	}
-	public String getDesp() {
-		return desp;
+	public String getName() {
+		return name;
 	}
-	public void setDesp(String desp) {
-		this.desp = desp;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public List<Doc> getTags() {
-		return tags;
+	public String getContent() {
+		return content;
 	}
-	public void setTags(List<Doc> tags) {
-		this.tags = tags;
+	public void setContent(String content) {
+		this.content = content;
 	}
+	public LocalDate getCreated() {
+		return created;
+	}
+	public void setCreated(LocalDate created) {
+		this.created = created;
+	}
+	public LocalDate getUpdated() {
+		return updated;
+	}
+	public void setUpdated(LocalDate updated) {
+		this.updated = updated;
+	}
+	// doc
+	public List<Doc> getDocs() {
+		return docs;
+	}
+	public void setDocs(List<Doc> docs) {
+		this.docs = docs;
+	}
+	public void addDoc(Doc doc) {
+		this.docs.add(doc);
+	}
+	public void removeDoc(Doc doc) {
+		this.docs.remove(doc);
+	}
+	
 	
 }
