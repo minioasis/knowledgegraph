@@ -102,7 +102,7 @@ public class KnowledgeGraphService {
 	}
 
 	public Page<Tag> findAllTags(Pageable pageable) {
-		return tagRepository.findAll(pageable);
+		return tagRepository.findAllTags(pageable);
 	}
 
 	public Page<Tag> findTagsByNameRegex(String name, Pageable pageable) {

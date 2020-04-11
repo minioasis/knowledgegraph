@@ -15,10 +15,9 @@
 			<form action="#" th:action="@{/admin/tag/search}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
 				<input type="hidden" id="size" name="size" value="10" />
-				<input type="hidden" id="sort" name="sort" value="name,asc" />
 				
 				<div class="form-account">
-					<input name="title" class="form-control" autofocus="autofocus" placeholder="Search Name"/>
+					<input name="name" class="form-control" autofocus="autofocus" placeholder="Search Name"/>
 					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
 				</div>				
 			</form>

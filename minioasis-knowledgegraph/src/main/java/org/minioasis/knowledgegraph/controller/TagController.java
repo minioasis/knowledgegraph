@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.minioasis.knowledgegraph.domain.Doc;
 import org.minioasis.knowledgegraph.domain.Tag;
+import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.service.KnowledgeGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -88,6 +89,43 @@ public class TagController {
 			return "redirect:/admin/tag/" + tag.getId();
 			
 		}
+	}
+	
+	@RequestMapping(value = { "/{id}/add.doc" }, method = RequestMethod.GET)
+	public String addRelated(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("tag", this.service.findTagById(id));
+		
+		return "tag.form.add.doc";
+		
+	}
+	
+	@RequestMapping(value = { "/{id}/search.doc" }, method = RequestMethod.GET)
+	public String search(@ModelAttribute("criteria") DocCriteria criteria, @PathVariable("id") long id, 
+			Model model, Pageable pageable) {
+
+		Page<Doc> page = this.service.findByCriteria(criteria, pageable);
+
+		model.addAttribute("page", page);
+		model.addAttribute("tag", this.service.findTagById(id));
+		
+		return "tag.form.add.doc";
+
+	}
+	
+	@RequestMapping(value = { "/add.doc" }, method = RequestMethod.POST)
+	public String addRelated(@RequestParam(value = "tagId", required = true) long tagId,
+			@RequestParam(value = "docId", required = true) long docId, Model model) {
+
+		Tag tag = this.service.findTagById(tagId);
+		Doc doc = this.service.findDocById(docId);
+
+		tag.addDoc(doc);
+
+		this.service.save(tag);
+
+		return "redirect:/admin/tag/" + tag.getId();
+
 	}
 	
 	@RequestMapping(value = { "/{id}/remove.doc/{docId}" }, method = RequestMethod.GET)

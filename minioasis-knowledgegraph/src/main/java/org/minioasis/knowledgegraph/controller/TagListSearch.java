@@ -42,7 +42,9 @@ public class TagListSearch {
 	public String search(@ModelAttribute("name") String name, HttpServletRequest request, 
 			Model model, Pageable pageable) {
 
-		Page<Tag> page = this.service.findTagsByNameRegex(name, pageable);
+		final String nameRegex = "(?i).*" + name + ".*";
+				  
+		Page<Tag> page = this.service.findTagsByNameRegex(nameRegex, pageable);
 		
 		String next = buildUri(request, page.getNumber() + 1);
 		String previous = buildUri(request, page.getNumber() - 1);

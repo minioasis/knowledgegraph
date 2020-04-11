@@ -36,7 +36,7 @@ public class DocRepositoryImpl implements DocRepositoryCustom {
         params.put ("limit", limit);
         
         //  Execute query and return the other side of the married relationship
-        String cypher = "MATCH (d:Doc) WHERE d.title =~ $title RETURN d ORDER BY d.title ASC SKIP $offset LIMIT $limit";
+        String cypher = "MATCH (d:Doc) WHERE d.title =~ $title RETURN d ORDER BY LOWER(d.title) ASC SKIP $offset LIMIT $limit";
         List <Doc> list = (List<Doc>) session.query(Doc.class, cypher, params);
         
         String totalQuery = "MATCH (d:Doc) WHERE d.title =~ $title RETURN count(*) AS total" ;
@@ -48,7 +48,7 @@ public class DocRepositoryImpl implements DocRepositoryCustom {
         	total = (long) row.get("total");
         }
            
-        return new PageImpl<>(list, pageable, total);
+        return new PageImpl<Doc>(list, pageable, total);
         
 	}
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+			
+			<h4>Tag</h4>
+			
+			<p class="btn btn-info rounded-pill" th:text="${tag.name}">Tag Name</p>
+			
+			<h4>Add Doc</h4>
+			
+			<form action="#" th:action="@{/admin/tag/{id}/search.doc(id=${tag.id})}" method="get">
+				<input type="hidden" id="page" name="page" value="0" />
+				<input type="hidden" id="size" name="size" value="10" />
+				<input type="hidden" id="sort" name="sort" value="title,asc" />
+				
+				<div class="form-account">
+					<input name="title" class="form-control" autofocus="autofocus" placeholder="Search Title"/>
+					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
+				</div>				
+			</form>
+			
+			<hr>
+	
+			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
+			
+			<form id="add_doc_form" action="#" th:action="@{/admin/tag/add.doc}" method="post">
+			
+				<input hidden="hidden" type="text" name="tagId"  th:value="${tag.id}"/>
+				<input id="docId" hidden="hidden" type="text" name="docId" value=""/>
+				
+				<script> 
+			        var tagId = document.getElementById("docId"); 
+			  
+			        function mySubmit(id) { 
+			        	tagId.setAttribute('value', id); 
+			        	document.getElementById("add_doc_form").submit();
+			        } 
+			    </script> 
+	    		
+				<table class="table table-responsive-sm table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Title</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+		
+					<tbody>
+						<tr th:each="e,iterator : ${page?.content}">
+							<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
+							<td th:text="${e.title}">Title</td>
+							<td>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Doc</button>
+							</td>
+						</tr>
+						<tr th:remove="all">
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			
+		</div>
+	</body>
+</html>
