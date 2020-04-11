@@ -36,6 +36,9 @@ public class Doc {
 	@Relationship(type = "TAGGED", direction = Relationship.INCOMING)
 	private List<Tag> tags = new ArrayList<Tag>();
 	
+	@Relationship(type = "OF")
+	private List<Archive> archives = new ArrayList<Archive>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -122,6 +125,18 @@ public class Doc {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+	}
+	public void  removeTag(Tag tag) {
+		this.tags.remove(tag);
+	}
+	public List<Archive> getArchives() {
+		return archives;
+	}
+	public void setArchives(List<Archive> archives) {
+		this.archives = archives;
 	}
 
 }

@@ -19,7 +19,7 @@ public class DocViewRemove {
 	@RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
 	public String view(@PathVariable("id") Long id, Model model) {
 		
-		model.addAttribute("doc", this.service.findById(id));
+		model.addAttribute("doc", this.service.findDocById(id));
 		
 		return "doc";
 
@@ -28,10 +28,10 @@ public class DocViewRemove {
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
 	public String delete(@PathVariable("id") long id, Model model) {
 
-		Doc doc = this.service.findById(id);
+		Doc doc = this.service.findDocById(id);
 		
 		if(doc != null) {
-			this.service.deleteById(id);
+			this.service.deleteDocById(id);
 		}else {
 			return "error";
 		}

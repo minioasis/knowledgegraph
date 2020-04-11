@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+	
+			<h4>Tag</h4>
+			
+			<div class="float-right">
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/tag/edit?id={id}(id=${tag.id})}">Edit</a>
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/tag/delete/{id}(id=${tag.id})}">Delete</a>		
+			</div>
+		
+			<table class="table table-responsive-sm table-bordered">		
+				<tbody>
+					<tr>
+						<td th:text="${tag.name}">Name</td>
+					</tr>
+				</tbody>
+			</table>
+	
+		</div>
+		
+	</body>
+</html>

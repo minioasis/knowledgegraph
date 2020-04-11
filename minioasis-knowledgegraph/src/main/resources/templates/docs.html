@@ -4,82 +4,84 @@
 	<head th:replace="fragments/head :: head(Minioasis)">
 	    <title>Minioasis Knowledge Graph</title>
 	</head>
-<body>
-
-	<div class="container pt-2">
+	<body>
 	
-		<div th:replace="fragments/header :: header"></div>
-
-		<form action="#" th:action="@{/admin/doc/search}" method="get">
-			<input type="hidden" id="page" name="page" value="0" />
-			<input type="hidden" id="size" name="size" value="10" />
-			<input type="hidden" id="sort" name="sort" value="title,asc" />
-			
-			<div class="form-account">
-				<input name="title" class="form-control" autofocus="autofocus" placeholder="Search Title"/>
-				<input hidden="hidden" type="submit" name="search" value="Submit"/>	
-			</div>				
-		</form>
+		<div class="container pt-2">
 		
-		<hr>
-
-		<div class="float-right">
-			<a th:if="${page.hasPrevious()}" th:href="${previous}" id="previous">
-				<button type="button" class="btn btn-outline-info rounded-pill">Previous</button>
-			</a>
-			<a th:if="${page.hasNext()}" th:href="${next}" id="next">
-				<button type="button" class="btn btn-outline-info rounded-pill">Next</button>
-			</a>	
+			<div th:replace="fragments/header :: header"></div>
+			
+			<h4>Docs</h4>
+	
+			<form action="#" th:action="@{/admin/doc/search}" method="get">
+				<input type="hidden" id="page" name="page" value="0" />
+				<input type="hidden" id="size" name="size" value="10" />
+				<input type="hidden" id="sort" name="sort" value="title,asc" />
+				
+				<div class="form-account">
+					<input name="title" class="form-control" autofocus="autofocus" placeholder="Search Title"/>
+					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
+				</div>				
+			</form>
+			
+			<hr>
+	
+			<div class="float-right">
+				<a th:if="${page.hasPrevious()}" th:href="${previous}" id="previous">
+					<button type="button" class="btn btn-outline-info rounded-pill">Previous</button>
+				</a>
+				<a th:if="${page.hasNext()}" th:href="${next}" id="next">
+					<button type="button" class="btn btn-outline-info rounded-pill">Next</button>
+				</a>	
+			</div>
+				
+			Total : <span th:text="${page.totalElements}">105</span>
+						
+			<table class="table table-responsive-sm">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Title</th>
+						<th>Link</th>
+						<th>created</th>
+						<th>Updated</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+	
+				<tbody>
+					<tr th:each="e,iterator : ${page.content}">
+						<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
+						<td>
+							<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
+								<span th:text="${e.title}"></span>
+							</a>
+						</td>
+						<td>
+							<a class="btn btn-sm btn-outline-primary text-primary" data-toggle="tooltip" data-placement="top" th:title="${e.link}" href="#" th:href="@{${e.link}}" target="_blank">
+								<i class="fas fa-link"></i>
+							</a>
+						</td>
+						<td>
+							<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span>
+						</td>
+						<td>
+							<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
+						</td>
+						<td>
+							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
+							| 
+							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
+						</td>
+					</tr>
+					<tr th:remove="all">
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+					</tr>
+				</tbody>
+			</table>
+			
 		</div>
-			
-		Total : <span th:text="${page.totalElements}">105</span>
-					
-		<table class="table table-responsive-sm">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Title</th>
-					<th>Link</th>
-					<th>created</th>
-					<th>Updated</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="e,iterator : ${page.content}">
-					<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
-					<td>
-						<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
-							<span th:text="${e.title}"></span>
-						</a>
-					</td>
-					<td>
-						<a class="btn btn-sm btn-outline-primary text-primary" data-toggle="tooltip" data-placement="top" th:title="${e.link}" href="#" th:href="@{${e.link}}" target="_blank">
-							<i class="fas fa-link"></i>
-						</a>
-					</td>
-					<td>
-						<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span>
-					</td>
-					<td>
-						<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
-					</td>
-					<td>
-						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
-						| 
-						<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
-					</td>
-				</tr>
-				<tr th:remove="all">
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-				</tr>
-			</tbody>
-		</table>
-		
-	</div>
-</body>
+	</body>
 </html>

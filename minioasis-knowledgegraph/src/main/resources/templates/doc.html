@@ -4,77 +4,92 @@
 	<head th:replace="fragments/head :: head(Minioasis)">
 	    <title>Minioasis Knowledge Graph</title>
 	</head>
-<body>
-
-	<div class="container pt-2">
+	<body>
 	
-		<div th:replace="fragments/header :: header"></div>
-
-		<div class="float-right">
-			<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/edit?id={id}(id=${doc.id})}">Edit</a>
-			<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/delete/{id}(id=${doc.id})}">Delete</a>		
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+	
+			<h4>Doc</h4>
+			
+			<div class="float-right">
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/edit?id={id}(id=${doc.id})}">Edit</a>
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/delete/{id}(id=${doc.id})}">Delete</a>		
+			</div>
+		
+			<table class="table table-responsive-sm table-bordered">
+				<tbody>
+					<tr>
+						<td>Title</td>
+						<td th:text="${doc.title}">Title</td>
+					</tr>
+					<tr>
+						<td>Link</td>
+						<td>
+							<a href="#" th:href="@{${doc.link}}" target="_blank">
+								<span th:text="${doc.link}"></span>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>Created</td>
+						<td class="font-weight-bold" th:text="${#temporals.format(doc.created,'yyyy-MM-dd <hh:MM:ss>')}">Created</td>
+					</tr>
+					<tr>
+						<td>Updated</td>
+						<td class="font-weight-bold" th:text="${#temporals.format(doc.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
+					</tr>
+					<tr>
+						<td>
+							Tags
+							<br>
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.tag(id=${doc.id})}">Add</a>
+						</td>
+						<td>
+							<span th:each="tag : ${doc.tags}">
+								<code th:text="${tag.name}"></code>,
+							</span>		
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Related docs
+							<br>
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.related(id=${doc.id})}">Add</a>
+						</td>
+						<td>
+							<table class="table table-responsive-sm table-bordered">
+								<tr>
+									<td>No</td>
+									<td>Title</td>
+									<td>Link</td>
+									<td>Action</td>
+								</tr>
+								<tr th:each="e,iterator : ${doc.docs}">
+									<td th:text="${iterator.index + 1}">1</td>
+								    <td>
+								    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
+								    		<span th:text="${e.title}"></span>
+								    	</a>
+								    </td>
+								    <td>
+								    	<a href="#" th:href="@{${e.link}}" target="_blank">
+								    		<span th:text="${e.link}"></span>
+								    	</a>
+								    </td>
+								    <td>
+								    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/remove.related/{relatedId}(id=${doc.id},relatedId=${e.id})}">remove</a>
+								    </td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	
 		</div>
-	
-		<table class="table table-responsive-sm table-bordered">
-			<tbody>
-				<tr>
-					<td>Title</td>
-					<td th:text="${doc.title}">Title</td>
-				</tr>
-				<tr>
-					<td>Link</td>
-					<td>
-						<a href="#" th:href="@{${doc.link}}" target="_blank">
-							<span th:text="${doc.link}"></span>
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>Created</td>
-					<td class="font-weight-bold" th:text="${#temporals.format(doc.created,'yyyy-MM-dd <hh:MM:ss>')}">Created</td>
-				</tr>
-				<tr>
-					<td>Updated</td>
-					<td class="font-weight-bold" th:text="${#temporals.format(doc.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
-				</tr>
-				<tr>
-					<td>
-						Related docs
-						<br>
-						<br>
-						<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.parent(id=${doc.id})}">Add</a>
-					</td>
-					<td>
-						<table class="table table-responsive-sm table-bordered">
-							<tr>
-								<td>No</td>
-								<td>Title</td>
-								<td>Link</td>
-								<td>Action</td>
-							</tr>
-							<tr th:each="e,iterator : ${doc.docs}">
-								<td th:text="${iterator.index + 1}">1</td>
-							    <td>
-							    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
-							    		<span th:text="${e.title}"></span>
-							    	</a>
-							    </td>
-							    <td>
-							    	<a href="#" th:href="@{${e.link}}" target="_blank">
-							    		<span th:text="${e.link}"></span>
-							    	</a>
-							    </td>
-							    <td>
-							    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/remove.parent/{parentId}(id=${doc.id},parentId=${e.id})}">remove</a>
-							    </td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-
-	</div>
-	
-</body>
+		
+	</body>
 </html>

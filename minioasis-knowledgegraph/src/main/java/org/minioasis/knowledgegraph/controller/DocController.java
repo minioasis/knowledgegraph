@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.validation.Valid;
 
 import org.minioasis.knowledgegraph.domain.Doc;
+import org.minioasis.knowledgegraph.domain.Tag;
 import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.service.KnowledgeGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,6 @@ public class DocController {
 				return "doc.form";				
 			}
 			
-			model.addAttribute("doc", doc);
-			
 			return "redirect:/admin/doc/" + doc.getId();
 			
 		}			
@@ -59,7 +58,7 @@ public class DocController {
 	@RequestMapping(value = { "/edit" }, method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id", required = true) Long id, Model model) {
 
-		Doc doc = this.service.findById(id);
+		Doc doc = this.service.findDocById(id);
 		
 		if(doc == null) {
 			model.addAttribute("error", "ITEM NOT FOUND !");
@@ -90,63 +89,109 @@ public class DocController {
 				return "doc.form";
 			}
 			
-			model.addAttribute("doc", doc);
-			
-			return "doc";
+			return "redirect:/admin/doc/" + doc.getId();
 			
 		}
 	}
 	
-	@RequestMapping(value = { "/{id}/add.parent" }, method = RequestMethod.GET)
-	public String addParent(@PathVariable("id") long id, Model model) {
+	@RequestMapping(value = { "/{id}/add.related" }, method = RequestMethod.GET)
+	public String addRelated(@PathVariable("id") long id, Model model) {
 		
-		model.addAttribute("doc", this.service.findById(id));
+		model.addAttribute("doc", this.service.findDocById(id));
 		
-		return "doc.form.add.parent";
+		return "doc.form.add.related";
 		
 	}
 	
-	@RequestMapping(value = { "/{id}/search.parent" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/{id}/search.related" }, method = RequestMethod.GET)
 	public String search(@ModelAttribute("criteria") DocCriteria criteria, @PathVariable("id") long id, 
 			Model model, Pageable pageable) {
 
 		Page<Doc> page = this.service.findByCriteria(criteria, pageable);
 
 		model.addAttribute("page", page);
-		model.addAttribute("doc", this.service.findById(id));
+		model.addAttribute("doc", this.service.findDocById(id));
 		
-		return "doc.form.add.parent";
+		return "doc.form.add.related";
 
 	}
 	
-	@RequestMapping(value = { "/add.parent" }, method = RequestMethod.POST)
-	public String addParent(@RequestParam(value = "docId", required = true) long docId,
-			@RequestParam(value = "parentId", required = true) long parentId, Model model) {
+	@RequestMapping(value = { "/add.related" }, method = RequestMethod.POST)
+	public String addRelated(@RequestParam(value = "docId", required = true) long docId,
+			@RequestParam(value = "relatedId", required = true) long relatedId, Model model) {
 
-		Doc parentDoc = this.service.findById(parentId);
-		Doc doc = this.service.findById(docId);
+		Doc relatedDoc = this.service.findDocById(relatedId);
+		Doc doc = this.service.findDocById(docId);
 
-		doc.addDoc(parentDoc);
+		doc.addDoc(relatedDoc);
 
 		this.service.save(doc);
-
-		model.addAttribute("doc", doc);
 
 		return "redirect:/admin/doc/" + doc.getId();
 
 	}
 	
-	@RequestMapping(value = { "/{id}/remove.parent/{parentId}" }, method = RequestMethod.GET)
-	public String removeParent(@PathVariable("id") long id, @PathVariable("parentId") long parentId, Model model) {
+	@RequestMapping(value = { "/{id}/remove.related/{relatedId}" }, method = RequestMethod.GET)
+	public String removeRelated(@PathVariable("id") long id, @PathVariable("relatedId") long relatedId, Model model) {
 
-		Doc parentDoc = this.service.findById(parentId);
-		Doc doc = this.service.findById(id);
+		Doc relatedDoc = this.service.findDocById(relatedId);
+		Doc doc = this.service.findDocById(id);
 
-		doc.removeDoc(parentDoc);
+		doc.removeDoc(relatedDoc);
 
 		this.service.save(doc);
 
-		model.addAttribute("doc", doc);
+		return "redirect:/admin/doc/" + doc.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/add.tag" }, method = RequestMethod.GET)
+	public String addTag(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("doc", this.service.findDocById(id));
+		
+		return "doc.form.add.tag";
+		
+	}
+	
+	@RequestMapping(value = { "/{id}/search.tag" }, method = RequestMethod.GET)
+	public String search(@ModelAttribute("name") String name, @PathVariable("id") long id, 
+			Model model, Pageable pageable) {
+
+		final String nameRegex = "(?i).*" + name + ".*";
+		Page<Tag> page = this.service.findTagsByNameRegex(nameRegex, pageable);
+
+		model.addAttribute("page", page);
+		model.addAttribute("doc", this.service.findDocById(id));
+		
+		return "doc.form.add.tag";
+
+	}
+	
+	@RequestMapping(value = { "/add.tag" }, method = RequestMethod.POST)
+	public String addTag(@RequestParam(value = "docId", required = true) long docId,
+			@RequestParam(value = "tagId", required = true) long tagId, Model model) {
+
+		Tag tag = this.service.findTagById(tagId);
+		Doc doc = this.service.findDocById(docId);
+
+		doc.addTag(tag);
+
+		this.service.save(doc);
+
+		return "redirect:/admin/doc/" + doc.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/remove.tag/{tagId}" }, method = RequestMethod.GET)
+	public String removeTag(@PathVariable("id") long id, @PathVariable("tagId") long tagId, Model model) {
+
+		Tag tag = this.service.findTagById(tagId);
+		Doc doc = this.service.findDocById(id);
+
+		doc.removeTag(tag);
+
+		this.service.save(doc);
 
 		return "redirect:/admin/doc/" + doc.getId();
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+			
+			<h4>Doc</h4>
+			
+			<table class="table table-sm table-bordered">
+				<tbody>
+					<tr>
+						<td>Title</td>
+						<td th:text="${doc.title}">Title</td>
+					</tr>
+					<tr>
+						<td>Link</td>
+						<td th:text="${doc.link}">Link</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<h4>Add Tag</h4>
+			
+			<form action="#" th:action="@{/admin/doc/{id}/search.tag(id=${doc.id})}" method="get">
+				<input type="hidden" id="page" name="page" value="0" />
+				<input type="hidden" id="size" name="size" value="10" />
+				<input type="hidden" id="sort" name="sort" value="name,asc" />
+				
+				<div class="form-account">
+					<input name="name" class="form-control" autofocus="autofocus" placeholder="Search Name"/>
+					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
+				</div>				
+			</form>
+			
+			<hr>
+	
+			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
+			
+			<form id="add_tag_form" action="#" th:action="@{/admin/doc/add.tag}" method="post">
+			
+				<input hidden="hidden" type="text" name="docId"  th:value="${doc.id}"/>
+				<input id="tagId" hidden="hidden" type="text" name="tagId" value=""/>
+				
+				<script> 
+			        var tagId = document.getElementById("tagId"); 
+			  
+			        function mySubmit(id) { 
+			        	tagId.setAttribute('value', id); 
+			        	document.getElementById("add_tag_form").submit();
+			        } 
+			    </script> 
+	    		
+				<table class="table table-responsive-sm table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+		
+					<tbody>
+						<tr th:each="e,iterator : ${page?.content}">
+							<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
+							<td th:text="${e.name}">Name</td>
+							<td>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Tag</button>
+							</td>
+						</tr>
+						<tr th:remove="all">
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			
+		</div>
+	</body>
+</html>

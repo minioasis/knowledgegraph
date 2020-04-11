@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DocRepository extends Neo4jRepository<Doc, Long>{
+public interface DocRepository extends Neo4jRepository<Doc, Long>, DocRepositoryCustom {
 
 	Doc findByTitle(@Param("title") String title);
 }

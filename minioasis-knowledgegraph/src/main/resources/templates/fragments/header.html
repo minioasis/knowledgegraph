@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
-<body>
-
-	<div th:fragment="header">
-		<h2>
-			<a th:href="@{/}">
-				Minioasis Knowledge Graph
+	<head>
+	</head>
+	<body>
+	
+		<div th:fragment="header">
+			<h2>
+				<a th:href="@{/}">
+					Minioasis Knowledge Graph
+				</a>
+			</h2>
+			
+			<a th:href="@{/admin/doc/save}">
+				Add Doc
 			</a>
-		</h2>
-		
-		<a th:href="@{/admin/doc/save}">
-			Add Doc
-		</a>
-		-
-		<a href="#" th:href="@{/admin/doc/list(page=0,size=10,sort='created,desc')}">
-			List Docs
-		</a>
-		
-		<br/>
-		<br/>
-		
-	</div>
-
-</body>
+			|
+			<a href="#" th:href="@{/admin/doc/list(page=0,size=10,sort='created,desc')}">
+				List Docs
+			</a>
+			|
+			<a th:href="@{/admin/tag/save}">
+				Add Tag
+			</a>
+			|
+			<a href="#" th:href="@{/admin/tag/list(page=0,size=10,sort='name,asc')}">
+				List Tags
+			</a>
+					
+			<br/>
+			<br/>
+			
+		</div>
+	
+	</body>
 </html>
