@@ -3,11 +3,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="fragments/head :: head(Minioasis)">
 	    <title>Minioasis Knowledge Graph</title>
+	    <style>
+			table td {
+				vertical-align: top;
+				border: solid 1px #888;
+				padding: 10px;
+			}
+		</style>
 	</head>
 	<body>
-	
-		<div class="container pt-2">
-			<h2>Error</h2>
+		
+		<div class="container pt-5">
+			
+			<h4 class="text-center">
+				<i class="far fa-sad-cry fa-3x text-primary"></i>
+				<i class="fas fa-bug text-success"></i>
+				<i class="fas fa-bug fa-2x text-warning"></i>
+				<i class="fas fa-bug fa-3x text-danger"></i>
+			</h4>
+				
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+					    <tr>
+					        <td style="width: 12%">Date</td>
+					        <td th:text="${timestamp}"/>
+					    </tr>
+					    <tr>
+					        <td>Path</td>
+					        <td th:text="${path}"/>
+					    </tr>
+					    <tr>
+					        <td>Error</td>
+					        <td th:text="${error}"/>
+					    </tr>
+					    <tr>
+					        <td>Status</td>
+					        <td th:text="${status}"/>
+					    </tr>
+					    <tr>
+					        <td>Message</td>
+					        <td th:text="${message}"/>
+					    </tr>
+					    <tr>
+					        <td>Exception</td>
+					        <td th:text="${exception}"/>
+					    </tr>
+					    <tr>
+					        <td>Trace</td>
+					        <td th:text="${trace}" />
+					    </tr>
+					</table>
+				</div>
+			</div> <!-- row -->
+					  
+			<div th:replace="fragments/script :: script"></div>
+			  
+			<div th:replace="fragments/footer :: footer"></div>
+	  
 		</div>
 		
 	</body>
