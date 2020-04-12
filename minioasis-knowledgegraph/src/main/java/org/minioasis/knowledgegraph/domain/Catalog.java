@@ -9,7 +9,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
-public class Category {
+public class Catalog {
 
 	@Id @GeneratedValue
 	Long id;
@@ -18,10 +18,10 @@ public class Category {
 	private String name;
 	
 	@Relationship(type = "PARENT", direction = Relationship.OUTGOING)
-	private Category parent;
+	private Catalog parent;
 	
 	@Relationship(type = "PARENT", direction = Relationship.INCOMING)
-	private List<Category> childrens = new ArrayList<Category>();
+	private List<Catalog> childrens = new ArrayList<Catalog>();
 	
 	@Relationship(type = "UNDER")
 	private List<Doc> docs = new ArrayList<Doc>();
@@ -44,23 +44,23 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Category getParent() {
+	public Catalog getParent() {
 		return parent;
 	}
-	public void setParent(Category parent) {
+	public void setParent(Catalog parent) {
 		this.parent = parent;
 	}
 	// children
-	public List<Category> getChildrens() {
+	public List<Catalog> getChildrens() {
 		return childrens;
 	}
-	public void setChildrens(List<Category> childrens) {
+	public void setChildrens(List<Catalog> childrens) {
 		this.childrens = childrens;
 	}
-	public void addChildren(Category children) {
+	public void addChildren(Catalog children) {
 		this.childrens.add(children);
 	}
-	public void removeChildren(Category children) {
+	public void removeChildren(Catalog children) {
 		this.childrens.remove(children);
 	}
 	// doc

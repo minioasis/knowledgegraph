@@ -31,7 +31,7 @@ public class Doc {
 	private List<Doc> docs = new ArrayList<Doc>();
 	
 	@Relationship(type = "UNDER", direction = Relationship.INCOMING)
-	private List<Category> categories = new ArrayList<Category>();
+	private List<Catalog> catalogs = new ArrayList<Catalog>();
 	
 	@Relationship(type = "TAGGED", direction = Relationship.INCOMING)
 	private List<Tag> tags = new ArrayList<Tag>();
@@ -107,18 +107,18 @@ public class Doc {
 	public void removeAuthor(Author author) {
 		this.authors.remove(author);
 	}
-	// category
-	public void AddCategory(Category category) {
-		this.categories.add(category);
+	//  catalog
+	public void AddCatalog(Catalog catalog) {
+		this.catalogs.add(category);
 	}
-	public void removeCategory(Category category) {
-		this.categories.remove(category);
+	public void removeCatalog(Catalog catalog) {
+		this.catalogs.remove(catalog);
 	}
-	public List<Category> getCategories() {
-		return categories;
+	public List<Catalog> getCatalogs() {
+		return catalogs;
 	}
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
+	public void setCatalogs(List<Catalog> catalogs) {
+		this.catalogs = catalogs;
 	}
 	// tag
 	public List<Tag> getTags() {
