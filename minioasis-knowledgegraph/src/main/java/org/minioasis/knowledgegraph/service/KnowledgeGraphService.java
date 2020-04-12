@@ -2,9 +2,12 @@ package org.minioasis.knowledgegraph.service;
 
 import java.util.Optional;
 
+import org.minioasis.knowledgegraph.domain.Archive;
 import org.minioasis.knowledgegraph.domain.Doc;
 import org.minioasis.knowledgegraph.domain.Tag;
+import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
 import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
+import org.minioasis.knowledgegraph.repository.ArchiveRepository;
 import org.minioasis.knowledgegraph.repository.DocRepository;
 import org.minioasis.knowledgegraph.repository.TagRepository;
 import org.slf4j.Logger;
@@ -23,10 +26,48 @@ public class KnowledgeGraphService {
 	private final static Logger LOG = LoggerFactory.getLogger(KnowledgeGraphService.class);
 
 	@Autowired
+	private ArchiveRepository archiveRepository;
+	@Autowired
 	private DocRepository docRepository;
 	@Autowired
 	private TagRepository tagRepository;
 
+	// Archive
+	
+	public void save(Archive entity) {
+		archiveRepository.save(entity);
+	}
+
+	public void edit(Archive entity) {
+		archiveRepository.save(entity);
+	}
+
+	public void delete(Archive entity) {
+		archiveRepository.delete(entity);
+	}
+
+	public void deleteArchiveById(Long id) {
+		archiveRepository.deleteById(id);
+	}
+
+	@Transactional(readOnly = true)
+	public Archive findArchiveById(Long id) {
+
+		Optional<Archive> entity = archiveRepository.findById(id);
+		if (entity.isPresent()) {
+			return entity.get();
+		}
+		return null;
+	}
+
+	public Page<Archive> findAllArchives(Pageable pageable) {
+		return archiveRepository.findAll(pageable);
+	}
+
+	
+	public Page<Archive> findByCriteria(ArchiveCriteria criteria, Pageable pageable) {
+		return this.archiveRepository.findByCriteria(criteria, pageable);
+	}
 	// Doc
 	public void save(Doc entity) {
 		docRepository.save(entity);

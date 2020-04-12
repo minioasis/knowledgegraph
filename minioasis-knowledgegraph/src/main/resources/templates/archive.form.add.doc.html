@@ -10,24 +10,24 @@
 		
 			<div th:replace="fragments/header :: header"></div>
 			
-			<h4>Doc</h4>
+			<h4>Archive</h4>
 			
 			<table class="table table-sm table-bordered">
 				<tbody>
 					<tr>
-						<td style="width:10%">Title</td>
-						<td th:text="${doc.title}">Title</td>
+						<td style="width:10%">Name</td>
+						<td th:text="${archive.name}">Name</td>
 					</tr>
 					<tr>
-						<td>Link</td>
-						<td th:text="${doc.link}">Link</td>
+						<td>Archive No</td>
+						<td th:text="${archive.archiveNo}">Archive No</td>
 					</tr>
 				</tbody>
 			</table>
 			
-			<h4>Add Related Doc</h4>
+			<h4>Add Doc</h4>
 			
-			<form action="#" th:action="@{/admin/doc/{id}/search.related(id=${doc.id})}" method="get">
+			<form action="#" th:action="@{/admin/archive/{id}/search.doc(id=${archive.id})}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
 				<input type="hidden" id="size" name="size" value="10" />
 				<input type="hidden" id="sort" name="sort" value="title,asc" />
@@ -42,17 +42,17 @@
 	
 			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
 			
-			<form id="add_related_form" action="#" th:action="@{/admin/doc/add.related}" method="post">
+			<form id="add_doc_form" action="#" th:action="@{/admin/archive/add.doc}" method="post">
 			
-				<input hidden="hidden" type="text" name="docId"  th:value="${doc.id}"/>
-				<input id="relatedId" hidden="hidden" type="text" name="relatedId" value=""/>
+				<input hidden="hidden" type="text" name="archiveId"  th:value="${archive.id}"/>
+				<input id="docId" hidden="hidden" type="text" name="docId" value=""/>
 				
 				<script> 
-			        var relatedId = document.getElementById("relatedId"); 
+			        var docId = document.getElementById("docId"); 
 			  
 			        function mySubmit(id) { 
-			        	relatedId.setAttribute('value', id); 
-			        	document.getElementById("add_related_form").submit();
+			        	docId.setAttribute('value', id); 
+			        	document.getElementById("add_doc_form").submit();
 			        } 
 			    </script> 
 	    		
@@ -72,7 +72,7 @@
 							<td th:text="${e.title}">title</td>
 							<td th:text="${e.link}">link</td>
 							<td>
-								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Related</button>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Doc</button>
 							</td>
 						</tr>
 						<tr th:remove="all">

@@ -12,21 +12,24 @@
 		
 			<form th:action="${#httpServletRequest.requestURI}"	th:object="${doc}" method="post">
 				<input type="text" hidden="hidden" th:field="*{id}" />
-		
-				<div>
 				
 					<h4>Create Doc</h4>
 		
-					<label>Title</label> <input type="text" class="form-control" th:field="*{title}" autofocus="autofocus" placeholder="Title" />
-					<p class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-		
-					<label>Link</label> <input type="text" class="form-control" th:field="*{link}" placeholder="Link" />
-					<p class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></p>
+					<div class="form-group">
+						<label>Title</label>
+						<input type="text" class="form-control" th:field="*{title}" autofocus="autofocus"/>
+						<small class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
+					</div>
+					
+					<div class="form-group">
+						<label>Link</label>
+						<input type="text" class="form-control" th:field="*{link}"/>
+						<small class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></small>
+					</div>
 					
 					<p></p>
+					
 					<input class="btn btn-info rounded-pill float-right" type="submit" value="Submit">
-		
-				</div>
 		
 			</form>
 		

@@ -60,30 +60,32 @@
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.related(id=${doc.id})}">Add</a>
 						</td>
 						<td>
-							<table class="table table-responsive-sm table-bordered">
-								<tr>
-									<td>No</td>
-									<td>Title</td>
-									<td>Link</td>
-									<td>Action</td>
-								</tr>
-								<tr th:each="e,iterator : ${doc.docs}">
-									<td th:text="${iterator.index + 1}">1</td>
-								    <td>
-								    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
-								    		<span th:text="${e.title}"></span>
-								    	</a>
-								    </td>
-								    <td>
-								    	<a href="#" th:href="@{${e.link}}" target="_blank">
-								    		<span th:text="${e.link}"></span>
-								    	</a>
-								    </td>
-								    <td>
-								    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/remove.related/{relatedId}(id=${doc.id},relatedId=${e.id})}">remove</a>
-								    </td>
-								</tr>
-							</table>
+							<div th:if="${doc.docs.size() > 0}">
+								<table class="table table-responsive-sm table-bordered">
+									<tr>
+										<td>No</td>
+										<td>Title</td>
+										<td>Link</td>
+										<td>Action</td>
+									</tr>
+									<tr th:each="e,iterator : ${doc.docs}">
+										<td th:text="${iterator.index + 1}">1</td>
+									    <td>
+									    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
+									    		<span th:text="${e.title}"></span>
+									    	</a>
+									    </td>
+									    <td>
+									    	<a href="#" th:href="@{${e.link}}" target="_blank">
+									    		<span th:text="${e.link}"></span>
+									    	</a>
+									    </td>
+									    <td>
+									    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/remove.related/{relatedId}(id=${doc.id},relatedId=${e.id})}">remove</a>
+									    </td>
+									</tr>
+								</table>
+							</div>
 						</td>
 					</tr>
 				</tbody>

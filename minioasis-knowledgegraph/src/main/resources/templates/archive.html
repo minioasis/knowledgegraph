@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+	
+			<h4>Archive</h4>
+			
+			<div class="float-right">
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/archive/edit?id={id}(id=${archive.id})}">Edit</a>
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/archive/delete/{id}(id=${archive.id})}">Delete</a>		
+			</div>
+		
+			<table class="table table-responsive-sm table-bordered">
+				<tbody>
+					<tr>
+						<td style="width:10%">Name</td>
+						<td th:text="${archive.name}">Name</td>
+					</tr>
+					<tr>
+						<td>Archive No</td>
+						<td th:text="${archive.archiveNo}">Archive No</td>
+					</tr>
+					<tr>
+						<td>Created</td>
+						<td class="font-weight-bold" th:text="${#temporals.format(archive.created,'yyyy-MM-dd <hh:MM:ss>')}">Created</td>
+					</tr>
+					<tr>
+						<td>Updated</td>
+						<td class="font-weight-bold" th:text="${#temporals.format(archive.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
+					</tr>
+					<tr>
+						<td>Content</td>
+						<td class="text-info"><textarea rows="15" style="min-width: 100%" name="note" th:text="${archive.content}"></textarea></td>
+					</tr>
+					<tr>
+						<td>
+							Docs
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/add.doc(id=${archive.id})}">Add</a>
+						</td>
+						<td>
+							<div th:if="${archive.docs.size() > 0}">
+								<table class="table table-responsive-sm table-bordered">
+									<tr>
+										<td>No</td>
+										<td>Title</td>
+										<td>Link</td>
+										<td>Action</td>
+									</tr>
+									<tr th:each="e,iterator : ${archive.docs}">
+										<td th:text="${iterator.index + 1}">1</td>
+									    <td>
+									    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
+									    		<span th:text="${e.title}"></span>
+									    	</a>
+									    </td>
+									    <td>
+									    	<a href="#" th:href="@{${e.link}}" target="_blank">
+									    		<span th:text="${e.link}"></span>
+									    	</a>
+									    </td>
+									    <td>
+									    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/remove.doc/{docId}(id=${archive.id},docId=${e.id})}">remove</a>
+									    </td>
+									</tr>
+								</table>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	
+		</div>
+		
+	</body>
+</html>

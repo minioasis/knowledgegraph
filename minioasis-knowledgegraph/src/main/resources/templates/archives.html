@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+			
+			<h4>Archives</h4>
+	
+			<form action="#" th:action="@{/admin/archive/search}" method="get">
+				<input type="hidden" id="page" name="page" value="0" />
+				<input type="hidden" id="size" name="size" value="10" />
+				<input type="hidden" id="sort" name="sort" value="name,asc" />
+				
+				<div class="form-account">
+					<input name="title" class="form-control" autofocus="autofocus" placeholder="Search By Name"/>
+					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
+				</div>				
+			</form>
+			
+			<hr>
+	
+			<div class="float-right">
+				<a th:if="${page.hasPrevious()}" th:href="${previous}" id="previous">
+					<button type="button" class="btn btn-outline-info rounded-pill">Previous</button>
+				</a>
+				<a th:if="${page.hasNext()}" th:href="${next}" id="next">
+					<button type="button" class="btn btn-outline-info rounded-pill">Next</button>
+				</a>	
+			</div>
+				
+			Total : <span th:text="${page.totalElements}">105</span>
+						
+			<table class="table table-responsive-sm">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Archive No</th>
+						<th>Created/Updated</th>
+						<th>Content</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+	
+				<tbody>
+					<tr th:each="e,iterator : ${page.content}">
+						<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
+						<td>
+							<a href="#" th:href="@{/admin/archive/{id}(id=${e.id})}">
+								<span th:text="${e.name}"></span>
+							</a>
+						</td>
+						<td th:text="${e.archiveNo}">Archive No</td>
+						<td>
+							<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span><br>
+							<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
+						</td>
+						<td><textarea class="form-control" rows="4" cols="30" name="content" th:text="${e.content}"></textarea></td>
+						<td>
+							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
+							| 
+							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
+						</td>
+					</tr>
+					<tr th:remove="all">
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+</html>
