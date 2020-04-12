@@ -109,7 +109,7 @@ public class Doc {
 	}
 	//  catalog
 	public void AddCatalog(Catalog catalog) {
-		this.catalogs.add(category);
+		this.catalogs.add(catalog);
 	}
 	public void removeCatalog(Catalog catalog) {
 		this.catalogs.remove(catalog);
