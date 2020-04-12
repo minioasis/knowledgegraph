@@ -15,8 +15,8 @@ public class Archive {
 	@Id
 	@GeneratedValue
 	Long id;
-	private String archiveNo;
 	private String name;
+	private String archiveNo;
 	private String content;
 	private LocalDateTime created = LocalDateTime.now();
 	private LocalDateTime updated;

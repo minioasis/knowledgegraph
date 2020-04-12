@@ -44,6 +44,7 @@ public class Catalog {
 	public void setName(String name) {
 		this.name = name;
 	}
+	// parent
 	public Catalog getParent() {
 		return parent;
 	}

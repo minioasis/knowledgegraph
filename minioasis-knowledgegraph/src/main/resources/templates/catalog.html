@@ -50,18 +50,12 @@
 								<table class="table table-responsive-sm table-bordered">
 									<tr>
 										<td>No</td>
-										<td>Parent</td>
 										<td>Name</td>
 										<td>ClassMark</td>
 										<td>Action</td>
 									</tr>
 									<tr th:each="e,iterator : ${catalog.childrens}">
 										<td th:text="${iterator.index + 1}">1</td>
-										<td>
-									    	<a href="#" th:href="@{/admin/catalog/{id}(id=${e.parent.id})}">
-									    		<span th:text="${e.parent.name}"></span>
-									    	</a>
-									    </td>
 										<td>
 									    	<a href="#" th:href="@{/admin/catalog/{id}(id=${e.id})}">
 									    		<span th:text="${e.name}"></span>

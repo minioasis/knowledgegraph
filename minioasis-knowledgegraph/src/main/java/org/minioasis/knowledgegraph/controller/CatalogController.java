@@ -184,9 +184,7 @@ public class CatalogController {
 	public String removeParent(@PathVariable("id") long id, Model model) {
 
 		Catalog catalog = this.service.findCatalogById(id);
-
 		catalog.setParent(null);
-
 		this.service.save(catalog);
 
 		return "redirect:/admin/catalog/" + catalog.getId();

@@ -1,0 +1,7 @@
+Delete all nodes
+----------------------------
+MATCH (n) DETACH DELETE n
+
+Delete relationship using relationship id
+-----------------------------
+START r=rel(144) DELETE r;
