@@ -20,7 +20,7 @@
 			<table class="table table-responsive-sm table-bordered">
 				<tbody>
 					<tr>
-						<td>Title</td>
+						<td style="width: 10%">Title</td>
 						<td th:text="${doc.title}">Title</td>
 					</tr>
 					<tr>
@@ -38,6 +38,20 @@
 					<tr>
 						<td>Updated</td>
 						<td class="font-weight-bold" th:text="${#temporals.format(doc.updated,'yyyy-MM-dd <hh:MM:ss>')}">Updated</td>
+					</tr>
+					<tr>
+						<td>
+							Catalogs
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.catalog(id=${doc.id})}">Add</a>
+						</td>
+						<td>
+							<span th:each="e : ${doc.catalogs}">
+								<a href="#" th:href="@{/admin/catalog/{id}(id=${e.id})}">
+									<code th:text="${e.name}"></code>,
+								</a>
+							</span>		
+						</td>
 					</tr>
 					<tr>
 						<td>

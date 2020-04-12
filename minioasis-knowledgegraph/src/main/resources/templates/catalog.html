@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+	
+			<h4>Catalog</h4>
+			
+			<div class="float-right">
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/catalog/edit?id={id}(id=${catalog.id})}">Edit</a>
+				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/catalog/delete/{id}(id=${catalog.id})}">Delete</a>		
+			</div>
+		
+			<table class="table table-responsive-sm table-bordered">
+				<tbody>
+				
+					<tr>
+						<td style="width: 10%">Parent</td>
+						<td>
+							<span th:text="${catalog.parent?.name}"></span>
+							<a class="btn btn-info rounded-pill" th:if="${catalog.parent == null}" href="#" th:href="@{/admin/catalog/{id}/add.parent(id=${catalog.id})}">Add</a>
+							<a class="btn btn-outline-info rounded-pill" th:if="${catalog.parent != null}" href="#" th:href="@{/admin/catalog/{id}/remove.parent(id=${catalog.id})}">remove</a>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>Name</td>
+						<td th:text="${catalog.name}">Name</td>
+					</tr>
+					
+					<tr>
+						<td>ClassMark</td>
+						<td th:text="${catalog.classMark}">ClassMark</td>
+					</tr>
+										
+					<tr>
+						<td>
+							Children
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/catalog/{id}/add.children(id=${catalog.id})}">Add</a>
+						</td>
+						<td>
+							<div th:if="${catalog.childrens.size() > 0}">
+								<table class="table table-responsive-sm table-bordered">
+									<tr>
+										<td>No</td>
+										<td>Parent</td>
+										<td>Name</td>
+										<td>ClassMark</td>
+										<td>Action</td>
+									</tr>
+									<tr th:each="e,iterator : ${catalog.childrens}">
+										<td th:text="${iterator.index + 1}">1</td>
+										<td>
+									    	<a href="#" th:href="@{/admin/catalog/{id}(id=${e.parent.id})}">
+									    		<span th:text="${e.parent.name}"></span>
+									    	</a>
+									    </td>
+										<td>
+									    	<a href="#" th:href="@{/admin/catalog/{id}(id=${e.id})}">
+									    		<span th:text="${e.name}"></span>
+									    	</a>
+									    </td>
+									    <td th:text="${e.classMark}">ClassMark</td>
+									    <td>
+									    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/catalog/{id}/remove.children/{childrenId}(id=${catalog.id},childrenId=${e.id})}">remove</a>
+									    </td>
+									</tr>
+								</table>
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td>
+							Docs
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/catalog/{id}/add.doc(id=${catalog.id})}">Add</a>
+						</td>
+						<td>
+							<div th:if="${catalog.docs.size() > 0}">
+								<table class="table table-responsive-sm table-bordered">
+									<tr>
+										<td>No</td>
+										<td>Title</td>
+										<td>Link</td>
+										<td>Action</td>
+									</tr>
+									<tr th:each="e,iterator : ${catalog.docs}">
+										<td th:text="${iterator.index + 1}">1</td>
+									    <td>
+									    	<a href="#" th:href="@{/admin/doc/{id}(id=${e.id})}">
+									    		<span th:text="${e.title}"></span>
+									    	</a>
+									    </td>
+									    <td>
+									    	<a href="#" th:href="@{${e.link}}" target="_blank">
+									    		<span th:text="${e.link}"></span>
+									    	</a>
+									    </td>
+									    <td>
+									    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/catalog/{id}/remove.doc/{docId}(id=${catalog.id},docId=${e.id})}">remove</a>
+									    </td>
+									</tr>
+								</table>
+							</div>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+	
+		</div>
+		
+	</body>
+</html>

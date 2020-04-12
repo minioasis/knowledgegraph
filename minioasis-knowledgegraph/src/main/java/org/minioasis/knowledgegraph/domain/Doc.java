@@ -108,7 +108,7 @@ public class Doc {
 		this.authors.remove(author);
 	}
 	//  catalog
-	public void AddCatalog(Catalog catalog) {
+	public void addCatalog(Catalog catalog) {
 		this.catalogs.add(catalog);
 	}
 	public void removeCatalog(Catalog catalog) {

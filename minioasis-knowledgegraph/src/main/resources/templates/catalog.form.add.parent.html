@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+			
+			<h4>Catalog</h4>
+			
+			<table class="table table-sm table-bordered">
+				<tbody>
+
+					<tr>
+						<td style="width: 10%">Parent</td>
+						<td th:text="${catalog.parent?.name}">Parent</td>
+					</tr>
+					
+					<tr>
+						<td style="width:10%">Name</td>
+						<td th:text="${catalog.name}">Name</td>
+					</tr>
+					
+					<tr>
+						<td>ClassMark</td>
+						<td th:text="${catalog.classMark}">ClassMark</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			
+			<h4>Add Children</h4>
+			
+			<form action="#" th:action="@{/admin/catalog/{id}/search.parent(id=${catalog.id})}" method="get">
+				<input type="hidden" id="page" name="page" value="0" />
+				<input type="hidden" id="size" name="size" value="10" />
+				<input type="hidden" id="sort" name="sort" value="name,asc" />
+				
+				<div class="form-account">
+					<input name="name" class="form-control" autofocus="autofocus" placeholder="Search By Name"/>
+					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
+				</div>				
+			</form>
+			
+			<hr>
+	
+			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
+			
+			<form id="add_parent_form" action="#" th:action="@{/admin/catalog/add.parent}" method="post">
+			
+				<input hidden="hidden" type="text" name="catalogId"  th:value="${catalog.id}"/>
+				<input id="parentId" hidden="hidden" type="text" name="parentId" value=""/>
+				
+				<script> 
+			        var parentId = document.getElementById("parentId"); 
+			  
+			        function mySubmit(id) { 
+			        	parentId.setAttribute('value', id); 
+			        	document.getElementById("add_parent_form").submit();
+			        } 
+			    </script> 
+	    		
+				<table class="table table-responsive-sm table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Parent</th>
+							<th>Name</th>
+							<th>ClassMark</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+		
+					<tbody>
+						<tr th:each="e,iterator : ${page?.content}">
+							<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
+							<td th:text="${e.parent?.name}">Name</td>
+							<td th:text="${e.name}">name</td>
+							<td th:text="${e.classMark}">ClassMark</td>
+							<td>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Parent</button>
+							</td>
+						</tr>
+						<tr th:remove="all">
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>4</td>
+							<td>5</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			
+		</div>
+	</body>
+</html>

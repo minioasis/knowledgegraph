@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 
+import org.minioasis.knowledgegraph.domain.Catalog;
 import org.minioasis.knowledgegraph.domain.Doc;
 import org.minioasis.knowledgegraph.domain.Tag;
+import org.minioasis.knowledgegraph.domain.criteria.CatalogCriteria;
 import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.service.KnowledgeGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,7 +157,7 @@ public class DocController {
 	}
 	
 	@RequestMapping(value = { "/{id}/search.tag" }, method = RequestMethod.GET)
-	public String search(@ModelAttribute("name") String name, @PathVariable("id") long id, 
+	public String searchTag(@ModelAttribute("name") String name, @PathVariable("id") long id, 
 			Model model, Pageable pageable) {
 
 		final String nameRegex = "(?i).*" + name + ".*";
@@ -190,6 +192,57 @@ public class DocController {
 		Doc doc = this.service.findDocById(id);
 
 		doc.removeTag(tag);
+
+		this.service.save(doc);
+
+		return "redirect:/admin/doc/" + doc.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/add.catalog" }, method = RequestMethod.GET)
+	public String addCatalog(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("doc", this.service.findDocById(id));
+		
+		return "doc.form.add.catalog";
+		
+	}
+	
+	@RequestMapping(value = { "/{id}/search.catalog" }, method = RequestMethod.GET)
+	public String search(@ModelAttribute("criteria") CatalogCriteria criteria, @PathVariable("id") long id, 
+			Model model, Pageable pageable) {
+
+		Page<Catalog> page = this.service.findByCriteria(criteria, pageable);
+
+		model.addAttribute("page", page);
+		model.addAttribute("doc", this.service.findDocById(id));
+		
+		return "doc.form.add.catalog";
+
+	}
+	
+	@RequestMapping(value = { "/add.catalog" }, method = RequestMethod.POST)
+	public String addCatalog(@RequestParam(value = "docId", required = true) long docId,
+			@RequestParam(value = "catalogId", required = true) long catalogId, Model model) {
+
+		Catalog catalog = this.service.findCatalogById(catalogId);
+		Doc doc = this.service.findDocById(docId);
+
+		doc.addCatalog(catalog);
+
+		this.service.save(doc);
+
+		return "redirect:/admin/doc/" + doc.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/remove.catalog/{catalogId}" }, method = RequestMethod.GET)
+	public String removeCatalog(@PathVariable("id") long id, @PathVariable("catalogId") long catalogId, Model model) {
+
+		Catalog catalog = this.service.findCatalogById(catalogId);
+		Doc doc = this.service.findDocById(id);
+
+		doc.removeCatalog(catalog);
 
 		this.service.save(doc);
 

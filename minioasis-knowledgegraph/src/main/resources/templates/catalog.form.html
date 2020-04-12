@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/head :: head(Minioasis)">
+	    <title>Minioasis Knowledge Graph</title>
+	</head>
+	<body>
+	
+		<div class="container pt-2">
+		
+			<div th:replace="fragments/header :: header"></div>
+		
+			<form th:action="${#httpServletRequest.requestURI}"	th:object="${catalog}" method="post">
+				<input type="text" hidden="hidden" th:field="*{id}" />
+				
+					<h4>Create Catalog</h4>
+		
+					<div class="form-group">
+						<label>Title</label>
+						<input type="text" class="form-control" th:field="*{name}" autofocus="autofocus"/>
+						<small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+					</div>
+					
+					<div class="form-group">
+						<label>ClassMark</label>
+						<input type="text" class="form-control" th:field="*{classMark}"/>
+						<small class="text-danger" th:if="${#fields.hasErrors('classMark')}" th:errors="*{classMark}"></small>
+					</div>
+					
+					<p></p>
+					
+					<input class="btn btn-info rounded-pill float-right" type="submit" value="Submit">
+		
+			</form>
+		
+		</div>
+	
+	</body>
+</html>

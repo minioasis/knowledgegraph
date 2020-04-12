@@ -3,11 +3,14 @@ package org.minioasis.knowledgegraph.service;
 import java.util.Optional;
 
 import org.minioasis.knowledgegraph.domain.Archive;
+import org.minioasis.knowledgegraph.domain.Catalog;
 import org.minioasis.knowledgegraph.domain.Doc;
 import org.minioasis.knowledgegraph.domain.Tag;
 import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
+import org.minioasis.knowledgegraph.domain.criteria.CatalogCriteria;
 import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.repository.ArchiveRepository;
+import org.minioasis.knowledgegraph.repository.CatalogRepository;
 import org.minioasis.knowledgegraph.repository.DocRepository;
 import org.minioasis.knowledgegraph.repository.TagRepository;
 import org.slf4j.Logger;
@@ -27,6 +30,8 @@ public class KnowledgeGraphService {
 
 	@Autowired
 	private ArchiveRepository archiveRepository;
+	@Autowired
+	private CatalogRepository catalogRepository;
 	@Autowired
 	private DocRepository docRepository;
 	@Autowired
@@ -68,6 +73,42 @@ public class KnowledgeGraphService {
 	public Page<Archive> findByCriteria(ArchiveCriteria criteria, Pageable pageable) {
 		return this.archiveRepository.findByCriteria(criteria, pageable);
 	}
+	
+	// Catalog
+	public void save(Catalog entity) {
+		catalogRepository.save(entity);
+	}
+
+	public void edit(Catalog entity) {
+		catalogRepository.save(entity);
+	}
+
+	public void delete(Catalog entity) {
+		catalogRepository.delete(entity);
+	}
+
+	public void deleteCatalogById(Long id) {
+		catalogRepository.deleteById(id);
+	}
+
+	@Transactional(readOnly = true)
+	public Catalog findCatalogById(Long id) {
+
+		Optional<Catalog> entity = catalogRepository.findById(id);
+		if (entity.isPresent()) {
+			return entity.get();
+		}
+		return null;
+	}
+
+	public Page<Catalog> findAllCatalogs(Pageable pageable) {
+		return catalogRepository.findAll(pageable);
+	}
+	
+	public Page<Catalog> findByCriteria(CatalogCriteria criteria, Pageable pageable){
+		return this.catalogRepository.findByCriteria(criteria, pageable);
+	}
+	
 	// Doc
 	public void save(Doc entity) {
 		docRepository.save(entity);
