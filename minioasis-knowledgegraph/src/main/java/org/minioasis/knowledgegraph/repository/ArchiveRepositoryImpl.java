@@ -36,7 +36,7 @@ public class ArchiveRepositoryImpl implements ArchiveRepositoryCustom {
         params.put ("limit", limit);
         
         //  Execute query and return the other side of the married relationship
-        String cypher = "MATCH (a:Archive) WHERE a.name =~ $name RETURN a ORDER BY LOWER(d.name) ASC SKIP $offset LIMIT $limit";
+        String cypher = "MATCH (a:Archive) WHERE a.name =~ $name RETURN a ORDER BY LOWER(a.name) ASC SKIP $offset LIMIT $limit";
         List <Archive> list = (List<Archive>) session.query(Archive.class, cypher, params);
         
         String totalQuery = "MATCH (a:Archive) WHERE a.name =~ $name RETURN count(*) AS total" ;
