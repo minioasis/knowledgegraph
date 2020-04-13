@@ -118,11 +118,21 @@ public class ArchiveController {
 	
 	@RequestMapping(value = { "/add.doc" }, method = RequestMethod.POST)
 	public String addRelated(@RequestParam(value = "archiveId", required = true) long archiveId,
-			@RequestParam(value = "docId", required = true) long docId, Model model) {
+														@RequestParam(value = "docId") long docId, 
+														@RequestParam(value = "docIds") long [] docIds, Model model) {
+
+		Archive archive = this.service.findArchiveById(archiveId);
+		
+		if(archiveId > -1 && docId == -1 && docIds.length > 0) {
+			
+			for (long id : docIds) {
+				Doc doc = this.service.findDocById(id);
+				archive.addDoc(doc);
+			}
+			
+		}
 
 		Doc doc = this.service.findDocById(docId);
-		Archive archive = this.service.findArchiveById(archiveId);
-
 		archive.addDoc(doc);
 
 		this.service.save(archive);
