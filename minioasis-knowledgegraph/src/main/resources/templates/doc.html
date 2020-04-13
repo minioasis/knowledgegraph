@@ -17,7 +17,7 @@
 				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/doc/delete/{id}(id=${doc.id})}">Delete</a>		
 			</div>
 		
-			<table class="table table-responsive-sm table-bordered">
+			<table class="table table-sm table-responsive-sm table-bordered">
 				<tbody>
 					<tr>
 						<td style="width: 10%">Title</td>
@@ -75,7 +75,7 @@
 						</td>
 						<td>
 							<div th:if="${doc.docs.size() > 0}">
-								<table class="table table-responsive-sm table-bordered">
+								<table class="table table-sm table-responsive-sm table-bordered">
 									<tr>
 										<td>No</td>
 										<td>Title</td>

@@ -17,7 +17,7 @@
 				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/catalog/delete/{id}(id=${catalog.id})}">Delete</a>		
 			</div>
 		
-			<table class="table table-responsive-sm table-bordered">
+			<table class="table table-sm table-responsive-sm table-bordered">
 				<tbody>
 				
 					<tr>
@@ -47,7 +47,7 @@
 						</td>
 						<td>
 							<div th:if="${catalog.childrens.size() > 0}">
-								<table class="table table-responsive-sm table-bordered">
+								<table class="table table-sm table-responsive-sm table-bordered">
 									<tr>
 										<td>No</td>
 										<td>Name</td>
@@ -79,7 +79,7 @@
 						</td>
 						<td>
 							<div th:if="${catalog.docs.size() > 0}">
-								<table class="table table-responsive-sm table-bordered">
+								<table class="table table-sm table-responsive-sm table-bordered">
 									<tr>
 										<td>No</td>
 										<td>Title</td>

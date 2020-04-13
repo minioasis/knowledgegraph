@@ -17,7 +17,7 @@
 				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/archive/delete/{id}(id=${archive.id})}">Delete</a>		
 			</div>
 		
-			<table class="table table-responsive-sm table-bordered">
+			<table class="table table-sm table-responsive-sm table-bordered">
 				<tbody>
 					<tr>
 						<td style="width:10%">Name</td>
@@ -37,7 +37,18 @@
 					</tr>
 					<tr>
 						<td>Content</td>
-						<td class="text-info"><textarea rows="15" style="min-width: 100%" name="note" th:text="${archive.content}"></textarea></td>
+						<td class="text-info">
+							<p>
+						  		<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+						    		Content
+						  		</a>
+							</p>
+							<div class="collapse" id="collapseExample">
+						  		<div class="card card-body">
+						    		<textarea rows="15" style="min-width: 100%" name="note" th:text="${archive.content}"></textarea>
+						  		</div>
+							</div>	
+						</td>
 					</tr>
 					<tr>
 						<td>
@@ -47,7 +58,7 @@
 						</td>
 						<td>
 							<div th:if="${archive.docs.size() > 0}">
-								<table class="table table-responsive-sm table-bordered">
+								<table class="table table-sm table-responsive-sm table-bordered">
 									<tr>
 										<td>No</td>
 										<td>Title</td>
@@ -76,7 +87,9 @@
 					</tr>
 				</tbody>
 			</table>
-	
+
+			<div th:replace="fragments/script :: script"></div>	  
+		  	<div th:replace="fragments/footer :: footer"></div>
 		</div>
 		
 	</body>

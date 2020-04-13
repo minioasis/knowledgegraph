@@ -17,10 +17,10 @@
 				<a class="btn btn-outline-info rounded-pill" href="#" th:href="@{/admin/tag/delete/{id}(id=${tag.id})}">Delete</a>		
 			</div>
 		
-			<table class="table table-responsive-sm table-bordered">		
+			<table class="table table-sm table-responsive-sm table-bordered">		
 				<tbody>
 					<tr>
-						<td>Name</td>
+						<td style="width:10%">Name</td>
 						<td><span class="btn btn-success rounded-pill" th:text="${tag.name}"></span></td>
 					</tr>
 					<tr>
@@ -30,7 +30,7 @@
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/tag/{id}/add.doc(id=${tag.id})}">Add</a>
 						</td>
 						<td>
-							<table class="table table-responsive-sm table-bordered">
+							<table class="table table-sm table-responsive-sm table-bordered">
 								<tr>
 									<td>No</td>
 									<td>Title</td>
