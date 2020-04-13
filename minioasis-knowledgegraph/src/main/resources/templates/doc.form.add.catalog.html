@@ -25,15 +25,15 @@
 				</tbody>
 			</table>
 			
-			<h4>Add Tag</h4>
+			<h4>Add Catalog</h4>
 			
-			<form action="#" th:action="@{/admin/doc/{id}/search.tag(id=${doc.id})}" method="get">
+			<form action="#" th:action="@{/admin/doc/{id}/search.catalog(id=${doc.id})}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
 				<input type="hidden" id="size" name="size" value="10" />
 				<input type="hidden" id="sort" name="sort" value="name,asc" />
 				
 				<div class="form-account">
-					<input name="name" class="form-control" autofocus="autofocus" placeholder="Search Name"/>
+					<input name="title" class="form-control" autofocus="autofocus" placeholder="Search By Name"/>
 					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
 				</div>				
 			</form>
@@ -42,17 +42,17 @@
 	
 			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
 			
-			<form id="add_tag_form" action="#" th:action="@{/admin/doc/add.tag}" method="post">
+			<form id="add_catalog_form" action="#" th:action="@{/admin/doc/add.catalog}" method="post">
 			
 				<input hidden="hidden" type="text" name="docId"  th:value="${doc.id}"/>
-				<input id="tagId" hidden="hidden" type="text" name="tagId" value=""/>
+				<input id="catalogId" hidden="hidden" type="text" name="catalogId" value=""/>
 				
 				<script> 
-			        var tagId = document.getElementById("tagId"); 
+			        var catalogId = document.getElementById("catalogId"); 
 			  
 			        function mySubmit(id) { 
-			        	tagId.setAttribute('value', id); 
-			        	document.getElementById("add_tag_form").submit();
+			        	catalogId.setAttribute('value', id); 
+			        	document.getElementById("add_catalog_form").submit();
 			        } 
 			    </script> 
 	    		
@@ -61,6 +61,7 @@
 						<tr>
 							<th>#</th>
 							<th>Name</th>
+							<th>ClassMark</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -69,14 +70,16 @@
 						<tr th:each="e,iterator : ${page?.content}">
 							<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
 							<td th:text="${e.name}">Name</td>
+							<td th:text="${e.classMark}">ClassMark</td>
 							<td>
-								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Tag</button>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Catalog</button>
 							</td>
 						</tr>
 						<tr th:remove="all">
 							<td>1</td>
 							<td>2</td>
 							<td>3</td>
+							<td>4</td>
 						</tr>
 					</tbody>
 				</table>

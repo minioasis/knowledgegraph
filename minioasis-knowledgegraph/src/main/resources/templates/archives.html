@@ -10,7 +10,7 @@
 		
 			<div th:replace="fragments/header :: header"></div>
 			
-			<h4>Archives</h4>
+			<h4><i class="fas fa-archive fa-lg text-success"></i> Archives</h4>
 	
 			<form action="#" th:action="@{/admin/archive/search}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
@@ -43,6 +43,7 @@
 						<th>Name</th>
 						<th>Archive No</th>
 						<th>Created/Updated</th>
+						<th>Add Doc</th>
 						<th>Content</th>
 						<th>Actions</th>
 					</tr>
@@ -61,6 +62,9 @@
 							<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span><br>
 							<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
 						</td>
+						<td>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/add.doc(id=${e.id})}">Add</a>
+						</td>
 						<td><textarea class="form-control" rows="4" cols="30" name="content" th:text="${e.content}"></textarea></td>
 						<td>
 							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/archive/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
@@ -73,6 +77,7 @@
 						<td>2</td>
 						<td>3</td>
 						<td>4</td>
+						<td>5</td>
 					</tr>
 				</tbody>
 			</table>

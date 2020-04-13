@@ -11,33 +11,35 @@
 					Minioasis Knowledge Graph
 				</a>
 			</h2>
-			<a class="btn btn-outline-light text-success" data-toggle="tooltip" data-placement="top" title="Archive" href="#" th:href="@{/admin/archive/save}">
-				<i class="fas fa-archive fa-2x"></i>
-			</a>
-			<a class="btn btn-outline-light text-success" href="#" th:href="@{/admin/archive/list(page=0,size=10,sort='created,desc')}">
-				<i class="fas fa-search fa-2x"></i>
-			</a>
-			|
-			<a class="btn btn-outline-light text-primary" data-toggle="tooltip" data-placement="top" title="Document" href="#" th:href="@{/admin/doc/save}">
-				<i class="far fa-file-alt fa-2x"></i>
-			</a>
-			<a class="btn btn-outline-light text-primary" href="#" th:href="@{/admin/doc/list(page=0,size=10,sort='created,desc')}">
-				<i class="fas fa-search fa-2x"></i>
-			</a>
-			|
-			<a class="btn btn-outline-light text-warning" data-toggle="tooltip" data-placement="top" title="Tag" href="#" th:href="@{/admin/tag/save}">
-				<i class="fas fa-tag fa-2x"></i>
-			</a>
-			<a class="btn btn-outline-light text-warning" href="#" th:href="@{/admin/tag/list(page=0,size=10,sort='name,asc')}">
-				<i class="fas fa-search fa-2x"></i>
-			</a>
-			|
-			<a class="btn btn-outline-light text-danger" data-toggle="tooltip" data-placement="top" title="Catalog" href="#" th:href="@{/admin/catalog/save}">
-				<i class="fas fa-sitemap text-danger fa-2x"></i>
-			</a>
-			<a class="btn btn-outline-light text-danger" href="#" th:href="@{/admin/catalog/list(page=0,size=10,sort='name,asc')}">
-				<i class="fas fa-search fa-2x"></i>
-			</a>					
+			<div class="float-right">
+				<a class="btn btn-outline-light text-success" data-toggle="tooltip" data-placement="top" title="Archive" href="#" th:href="@{/admin/archive/save}">
+					<i class="fas fa-archive fa-2x"></i>
+				</a>
+				<a class="btn btn-outline-light text-success" href="#" th:href="@{/admin/archive/list(page=0,size=10,sort='created,desc')}">
+					<i class="fas fa-search fa-2x"></i>
+				</a>
+				|
+				<a class="btn btn-outline-light text-primary" data-toggle="tooltip" data-placement="top" title="Document" href="#" th:href="@{/admin/doc/save}">
+					<i class="far fa-file-alt fa-2x"></i>
+				</a>
+				<a class="btn btn-outline-light text-primary" href="#" th:href="@{/admin/doc/list(page=0,size=10,sort='created,desc')}">
+					<i class="fas fa-search fa-2x"></i>
+				</a>
+				|
+				<a class="btn btn-outline-light text-warning" data-toggle="tooltip" data-placement="top" title="Tag" href="#" th:href="@{/admin/tag/save}">
+					<i class="fas fa-tag fa-2x"></i>
+				</a>
+				<a class="btn btn-outline-light text-warning" href="#" th:href="@{/admin/tag/list(page=0,size=10,sort='name,asc')}">
+					<i class="fas fa-search fa-2x"></i>
+				</a>
+				|
+				<a class="btn btn-outline-light text-danger" data-toggle="tooltip" data-placement="top" title="Catalog" href="#" th:href="@{/admin/catalog/save}">
+					<i class="fas fa-sitemap text-danger fa-2x"></i>
+				</a>
+				<a class="btn btn-outline-light text-danger" href="#" th:href="@{/admin/catalog/list(page=0,size=10,sort='name,asc')}">
+					<i class="fas fa-search fa-2x"></i>
+				</a>
+			</div>					
 			<br/>
 			<br/>
 			

@@ -42,6 +42,7 @@ public class ArchiveController {
 		} else {		
 			
 			try{
+				archive.setCreated(LocalDateTime.now());
 				this.service.save(archive);
 			} 
 			catch (DataIntegrityViolationException eive)
@@ -124,7 +125,7 @@ public class ArchiveController {
 		Archive archive = this.service.findArchiveById(archiveId);
 		
 		// add multiple docs
-		if(archiveId > -1 && docId == -1 && docIds.length > 0) {
+		if(archiveId > -1 && docId == -1 && docIds != null &&  docIds.length > 0) {
 			
 			for (long id : docIds) {
 				Doc doc = this.service.findDocById(id);

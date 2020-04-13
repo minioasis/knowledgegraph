@@ -18,7 +18,7 @@ public class Archive {
 	private String name;
 	private String archiveNo;
 	private String content;
-	private LocalDateTime created = LocalDateTime.now();
+	private LocalDateTime created;
 	private LocalDateTime updated;
 	
 	@Relationship(type = "OF", direction = Relationship.INCOMING)
