@@ -12,24 +12,26 @@
 		
 			<form th:action="${#httpServletRequest.requestURI}"	th:object="${doc}" method="post">
 				<input type="text" hidden="hidden" th:field="*{id}" />
+				<input type="text" hidden="hidden" th:field="*{created}" />
+				<input type="text" hidden="hidden" th:field="*{updated}" />
 				
-					<h4><i class="far fa-file-alt fa-lg text-primary"></i> Create Doc</h4>
-		
-					<div class="form-group">
-						<label>Title</label>
-						<input type="text" class="form-control" th:field="*{title}" autofocus="autofocus"/>
-						<small class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
-					</div>
-					
-					<div class="form-group">
-						<label>Link</label>
-						<input type="text" class="form-control" th:field="*{link}"/>
-						<small class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></small>
-					</div>
-					
-					<p></p>
-					
-					<input class="btn btn-info rounded-pill float-right" type="submit" value="Submit">
+				<h4><i class="far fa-file-alt fa-lg text-primary"></i> Create Doc</h4>
+	
+				<div class="form-group">
+					<label>Title</label>
+					<input type="text" class="form-control" th:field="*{title}" autofocus="autofocus"/>
+					<small class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
+				</div>
+				
+				<div class="form-group">
+					<label>Link</label>
+					<input type="text" class="form-control" th:field="*{link}"/>
+					<small class="text-danger" th:if="${#fields.hasErrors('link')}" th:errors="*{link}"></small>
+				</div>
+				
+				<p></p>
+				
+				<input class="btn btn-info rounded-pill float-right" type="submit" value="Submit">
 		
 			</form>
 
