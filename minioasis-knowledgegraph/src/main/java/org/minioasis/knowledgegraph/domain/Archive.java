@@ -21,7 +21,7 @@ public class Archive {
 	private LocalDateTime created;
 	private LocalDateTime updated;
 	
-	@Relationship(type = "OF", direction = Relationship.INCOMING)
+	@Relationship(type = "BELONG_TO", direction = Relationship.INCOMING)
 	private List<Doc> docs = new ArrayList<Doc>();
 
 	public Long getId() {

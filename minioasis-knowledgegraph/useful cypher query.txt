@@ -1,3 +1,7 @@
+List 25 nodes
+----------------------------
+MATCH (n) RETURN n LIMIT 25
+
 Delete all nodes
 ----------------------------
 MATCH (n) DETACH DELETE n
@@ -5,3 +9,9 @@ MATCH (n) DETACH DELETE n
 Delete relationship using relationship id
 -----------------------------
 START r=rel(144) DELETE r;
+
+change relationship name
+-----------------------------
+MATCH (n)-[rel:OF]->(m)
+MERGE (n)-[:BELONG_TO]->(m)
+DELETE rel

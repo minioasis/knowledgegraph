@@ -17,13 +17,13 @@ public class Catalog {
 	private String classMark;
 	private String name;
 	
-	@Relationship(type = "PARENT", direction = Relationship.OUTGOING)
+	@Relationship(type = "CHILD_OF", direction = Relationship.OUTGOING)
 	private Catalog parent;
 	
-	@Relationship(type = "PARENT", direction = Relationship.INCOMING)
+	@Relationship(type = "CHILD_OF", direction = Relationship.INCOMING)
 	private List<Catalog> childrens = new ArrayList<Catalog>();
 	
-	@Relationship(type = "UNDER")
+	@Relationship(type = "IN")
 	private List<Doc> docs = new ArrayList<Doc>();
 
 	public Long getId() {

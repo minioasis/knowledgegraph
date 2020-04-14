@@ -24,19 +24,19 @@ public class Doc {
  
     private LocalDateTime updated;
 	
-	@Relationship(type = "BY", direction = Relationship.INCOMING)
+	@Relationship(type = "BY", direction = Relationship.OUTGOING)
 	private List<Author> authors = new ArrayList<Author>();
 	
 	@Relationship(type = "RELATED_TO", direction = Relationship.UNDIRECTED)
 	private List<Doc> docs = new ArrayList<Doc>();
 	
-	@Relationship(type = "UNDER", direction = Relationship.INCOMING)
+	@Relationship(type = "IN", direction = Relationship.OUTGOING)
 	private List<Catalog> catalogs = new ArrayList<Catalog>();
 	
 	@Relationship(type = "TAGGED", direction = Relationship.INCOMING)
 	private List<Tag> tags = new ArrayList<Tag>();
 	
-	@Relationship(type = "OF")
+	@Relationship(type = "BELONG_TO")
 	private List<Archive> archives = new ArrayList<Archive>();
 	
 	public Long getId() {
