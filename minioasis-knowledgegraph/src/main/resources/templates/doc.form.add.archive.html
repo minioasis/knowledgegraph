@@ -25,9 +25,9 @@
 				</tbody>
 			</table>
 			
-			<h4>Add Catalog</h4>
+			<h4>Add Archive</h4>
 			
-			<form action="#" th:action="@{/admin/doc/{id}/search.catalog(id=${doc.id})}" method="get">
+			<form action="#" th:action="@{/admin/doc/{id}/search.archive(id=${doc.id})}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
 				<input type="hidden" id="size" name="size" value="10" />
 				<input type="hidden" id="sort" name="sort" value="name,asc" />
@@ -42,17 +42,17 @@
 	
 			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
 			
-			<form id="add_catalog_form" action="#" th:action="@{/admin/doc/add.catalog}" method="post">
+			<form id="add_archive_form" action="#" th:action="@{/admin/doc/add.archive}" method="post">
 			
 				<input hidden="hidden" type="text" name="docId"  th:value="${doc.id}"/>
-				<input id="catalogId" hidden="hidden" type="text" name="catalogId" value=""/>
+				<input id="archiveId" hidden="hidden" type="text" name="archiveId" value=""/>
 				
 				<script> 
-			        var catalogId = document.getElementById("catalogId"); 
+			        var archiveId = document.getElementById("archiveId"); 
 			  
 			        function mySubmit(id) { 
-			        	catalogId.setAttribute('value', id); 
-			        	document.getElementById("add_catalog_form").submit();
+			        	archiveId.setAttribute('value', id); 
+			        	document.getElementById("add_archive_form").submit();
 			        } 
 			    </script> 
 	    		
@@ -61,7 +61,7 @@
 						<tr>
 							<th>#</th>
 							<th>Name</th>
-							<th>ClassMark</th>
+							<th>Archive No</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -70,9 +70,9 @@
 						<tr th:each="e,iterator : ${page?.content}">
 							<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
 							<td th:text="${e.name}">Name</td>
-							<td th:text="${e.classMark}">ClassMark</td>
+							<td th:text="${e.archiveNo}">Archive No</td>
 							<td>
-								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Catalog</button>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Archive</button>
 							</td>
 						</tr>
 						<tr th:remove="all">

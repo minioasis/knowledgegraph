@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 
+import org.minioasis.knowledgegraph.domain.Archive;
 import org.minioasis.knowledgegraph.domain.Catalog;
 import org.minioasis.knowledgegraph.domain.Doc;
 import org.minioasis.knowledgegraph.domain.Tag;
+import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
 import org.minioasis.knowledgegraph.domain.criteria.CatalogCriteria;
 import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.service.KnowledgeGraphService;
@@ -35,7 +37,8 @@ public class DocController {
 		model.addAttribute("doc", new Doc());
 		return "doc.form";
 	}	
-	
+
+	// crud
 	@RequestMapping(value = { "/save" }, method = RequestMethod.POST)
 	public String save(@ModelAttribute("doc") @Valid Doc doc, BindingResult result, Model model) {
 		
@@ -96,6 +99,7 @@ public class DocController {
 		}
 	}
 	
+	// add doc
 	@RequestMapping(value = { "/{id}/add.related" }, method = RequestMethod.GET)
 	public String addRelated(@PathVariable("id") long id, Model model) {
 		
@@ -147,6 +151,7 @@ public class DocController {
 
 	}
 	
+	// add tag
 	@RequestMapping(value = { "/{id}/add.tag" }, method = RequestMethod.GET)
 	public String addTag(@PathVariable("id") long id, Model model) {
 		
@@ -199,6 +204,7 @@ public class DocController {
 
 	}
 	
+	// add catalog
 	@RequestMapping(value = { "/{id}/add.catalog" }, method = RequestMethod.GET)
 	public String addCatalog(@PathVariable("id") long id, Model model) {
 		
@@ -249,4 +255,57 @@ public class DocController {
 		return "redirect:/admin/doc/" + doc.getId();
 
 	}
+	
+	// add archive
+	@RequestMapping(value = { "/{id}/add.archive" }, method = RequestMethod.GET)
+	public String addArchive(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("doc", this.service.findDocById(id));
+		
+		return "doc.form.add.archive";
+		
+	}
+	
+	@RequestMapping(value = { "/{id}/search.archive" }, method = RequestMethod.GET)
+	public String search(@ModelAttribute("criteria") ArchiveCriteria criteria, @PathVariable("id") long id, 
+			Model model, Pageable pageable) {
+
+		Page<Archive> page = this.service.findByCriteria(criteria, pageable);
+
+		model.addAttribute("page", page);
+		model.addAttribute("doc", this.service.findDocById(id));
+		
+		return "doc.form.add.archive";
+
+	}
+	
+	@RequestMapping(value = { "/add.archive" }, method = RequestMethod.POST)
+	public String addArchive(@RequestParam(value = "docId", required = true) long docId,
+			@RequestParam(value = "archiveId", required = true) long archiveId, Model model) {
+
+		Archive archive = this.service.findArchiveById(archiveId);
+		Doc doc = this.service.findDocById(docId);
+
+		doc.addArchive(archive);
+
+		this.service.save(doc);
+
+		return "redirect:/admin/doc/" + doc.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/remove.archive/{archiveId}" }, method = RequestMethod.GET)
+	public String removeArchive(@PathVariable("id") long id, @PathVariable("archiveId") long archiveId, Model model) {
+
+		Archive archive = this.service.findArchiveById(archiveId);
+		Doc doc = this.service.findDocById(id);
+
+		doc.removeArchive(archive);
+
+		this.service.save(doc);
+
+		return "redirect:/admin/doc/" + doc.getId();
+
+	}
+	
 }

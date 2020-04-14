@@ -41,6 +41,20 @@
 					</tr>
 					<tr>
 						<td>
+							Archives
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.archive(id=${doc.id})}">Add</a>
+						</td>
+						<td>
+							<span th:each="e : ${doc.archives}">
+								<a href="#" th:href="@{/admin/archive/{id}(id=${e.id})}">
+									<span th:text="${e.name}"></span>,
+								</a>
+							</span>		
+						</td>
+					</tr>
+					<tr>
+						<td>
 							Catalogs
 							<br>
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/doc/{id}/add.catalog(id=${doc.id})}">Add</a>
@@ -48,7 +62,7 @@
 						<td>
 							<span th:each="e : ${doc.catalogs}">
 								<a href="#" th:href="@{/admin/catalog/{id}(id=${e.id})}">
-									<code th:text="${e.name}"></code>,
+									<span th:text="${e.name}"></span>,
 								</a>
 							</span>		
 						</td>
