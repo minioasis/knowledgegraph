@@ -21,7 +21,7 @@
 				<tbody>
 				
 					<tr>
-						<td style="width: 10%">Parent</td>
+						<td style="width: 10%">Parent <i class="fas fa-sitemap fa-lg text-danger float-right"></i></td>
 						<td>
 							<span th:text="${catalog.parent?.name}"></span>
 							<a class="btn btn-info rounded-pill" th:if="${catalog.parent == null}" href="#" th:href="@{/admin/catalog/{id}/add.parent(id=${catalog.id})}">Add</a>
@@ -41,7 +41,7 @@
 										
 					<tr>
 						<td>
-							Children
+							Children <i class="fas fa-sitemap fa-lg text-danger float-right"></i>
 							<br>
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/catalog/{id}/add.children(id=${catalog.id})}">Add</a>
 						</td>
@@ -73,7 +73,7 @@
 					
 					<tr>
 						<td>
-							Docs
+							Docs <i class="far fa-file-alt fa-lg text-primary float-right"></i>
 							<br>
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/catalog/{id}/add.doc(id=${catalog.id})}">Add</a>
 						</td>
