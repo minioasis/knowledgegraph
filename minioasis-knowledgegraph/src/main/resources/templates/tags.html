@@ -10,7 +10,7 @@
 		
 			<div th:replace="fragments/header :: header"></div>
 			
-			<h4>Tags</h4>
+			<h4><i class="fas fa-tag fa-lg text-warning"></i> Tags</h4>
 	
 			<form action="#" th:action="@{/admin/tag/search}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
@@ -40,6 +40,7 @@
 					<tr>
 						<th>#</th>
 						<th>Name</th>
+						<th>Add Doc</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -53,6 +54,11 @@
 							</a>
 						</td>
 						<td>
+							<a href="#" th:href="@{/admin/tag/{id}/add.doc(id=${e.id})}">
+								<i class="far fa-file-alt fa-2x text-primary"></i>
+							</a>
+						</td>
+						<td>
 							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/tag/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
 							| 
 							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/tag/delete/{id}(id=${e.id})}"><i class="far fa-trash-alt"></i></a>	
@@ -62,6 +68,7 @@
 						<td>1</td>
 						<td>2</td>
 						<td>3</td>
+						<td>4</td>
 					</tr>
 				</tbody>
 			</table>

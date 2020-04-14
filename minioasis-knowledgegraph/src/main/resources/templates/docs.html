@@ -42,8 +42,8 @@
 						<th>#</th>
 						<th>Title</th>
 						<th>Link</th>
-						<th>created</th>
-						<th>Updated</th>
+						<th>created/Updated</th>
+						<th>Add</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -62,10 +62,22 @@
 							</a>
 						</td>
 						<td>
-							<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span>
+							<span th:text="${#temporals.format(e.created,'yyyy-MM-dd')}"></span><br>
+							<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
 						</td>
 						<td>
-							<span th:text="${#temporals.format(e.updated,'yyyy-MM-dd')}"></span>
+							<a href="#" th:href="@{/admin/doc/{id}/add.archive(id=${e.id})}">
+								<i class="fas fa-archive fa-2x text-success"></i>
+							</a> .
+							<a href="#" th:href="@{/admin/doc/{id}/add.catalog(id=${e.id})}">
+								<i class="fas fa-sitemap fa-2x text-danger"></i>
+							</a> .
+							<a href="#" th:href="@{/admin/doc/{id}/add.tag(id=${e.id})}">
+								<i class="fas fa-tag fa-2x text-warning"></i>
+							</a> .
+							<a href="#" th:href="@{/admin/doc/{id}/add.related(id=${e.id})}">
+								<i class="far fa-file-alt fa-2x text-primary"></i>
+							</a>
 						</td>
 						<td>
 							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/doc/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>
