@@ -38,15 +38,15 @@
 				</tbody>
 			</table>
 			
-			<h4>Add Doc <i class="far fa-file-alt text-primary"></i></h4>
+			<h4>Add Children <i class="fas fa-archive text-success"></i></h4>
 			
-			<form action="#" th:action="@{/admin/archive/{id}/search.doc(id=${archive.id})}" method="get">
+			<form action="#" th:action="@{/admin/archive/{id}/search.children(id=${archive.id})}" method="get">
 				<input type="hidden" id="page" name="page" value="0" />
 				<input type="hidden" id="size" name="size" value="10" />
-				<input type="hidden" id="sort" name="sort" value="title,asc" />
+				<input type="hidden" id="sort" name="sort" value="name,asc" />
 				
 				<div class="form-account">
-					<input name="title" class="form-control" autofocus="autofocus" placeholder="Search By Title"/>
+					<input name="name" class="form-control" autofocus="autofocus" placeholder="Search By Name"/>
 					<input hidden="hidden" type="submit" name="search" value="Submit"/>	
 				</div>				
 			</form>
@@ -55,23 +55,23 @@
 	
 			Total (Max 10 nos.) : <span th:text="${page?.totalElements}">105</span>
 			
-			<button type="button" class="btn btn-primary rounded-pill float-right" th:onclick="submitSelected()">Add selected docs</button>
+			<button type="button" class="btn btn-primary rounded-pill float-right" th:onclick="submitSelected()">Add selected childrens</button>
 			
-			<form id="add_doc_form" action="#" th:action="@{/admin/archive/add.doc}" method="post">
+			<form id="add_children_form" action="#" th:action="@{/admin/archive/add.children}" method="post">
 			
 				<input hidden="hidden" type="text" name="archiveId"  th:value="${archive.id}"/>
-				<input id="docId" hidden="hidden" type="text" name="docId" value="-1"/>
+				<input id="childrenId" hidden="hidden" type="text" name="childrenId" value="-1"/>
 				
 				<script> 
-			        var docId = document.getElementById("docId"); 
+			        var childrenId = document.getElementById("childrenId"); 
 			  
 			        function mySubmit(id) { 
-			        	docId.setAttribute('value', id); 
-			        	document.getElementById("add_doc_form").submit();
+			        	childrenId.setAttribute('value', id); 
+			        	document.getElementById("add_children_form").submit();
 			        };
 			        
 			        function submitSelected() { 
-			        	document.getElementById("add_doc_form").submit();
+			        	document.getElementById("add_children_form").submit();
 			        }
 			             
 			    </script>
@@ -89,8 +89,8 @@
 						<tr>
 							<th>#</th>
 							<th><input type="checkbox" id="checkall" /></th>
-							<th>Title</th>
-							<th>Link</th>
+							<th>Name</th>
+							<th>Archive No</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -98,11 +98,11 @@
 					<tbody>
 						<tr th:each="e,iterator : ${page?.content}">
 							<td th:text="${iterator.index + 1} + ${page.number * page.size}">1</td>
-							<td><input type="checkbox" name="docIds" th:value="${e.id}" /></td>
-							<td th:text="${e.title}">title</td>
-							<td th:text="${e.link}">link</td>
+							<td><input type="checkbox" name="childrenIds" th:value="${e.id}" /></td>
+							<td th:text="${e.name}">Name</td>
+							<td th:text="${e.archiveNo}">Archive No</td>
 							<td>
-								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Doc</button>
+								<button type="button" class="btn btn-primary rounded-pill" th:onclick="mySubmit([[${e.id}]])">Add Children</button>
 							</td>
 						</tr>
 						<tr th:remove="all">

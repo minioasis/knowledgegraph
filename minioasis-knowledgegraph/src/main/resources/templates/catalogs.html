@@ -42,7 +42,7 @@
 						<th>#</th>
 						<th>Name</th>
 						<th>ClassMark</th>
-						<th>Add Doc</th>
+						<th>Add</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -57,9 +57,15 @@
 						</td>
 						<td th:text="${e.classMark}">ClassMark</td>
 						<td>
-							<a href="#" th:href="@{/admin/tag/{id}/add.doc(id=${e.id})}">
+							<a href="#" th:href="@{/admin/catalog/{id}/add.parent(id=${e.id})}">
+								<i class="fas fa-user fa-2x text-danger"></i>
+							</a> .
+							<a href="#" th:href="@{/admin/catalog/{id}/add.doc(id=${e.id})}">
 								<i class="far fa-file-alt fa-2x text-primary"></i>
-							</a>
+							</a> .
+							<a href="#" th:href="@{/admin/catalog/{id}/add.children(id=${e.id})}">
+								<i class="fas fa-baby fa-2x text-danger"></i>
+							</a> .
 						</td>
 						<td>
 							<a class="btn btn-sm btn-outline-info text-info" href="#" th:href="@{/admin/catalog/edit?id={id}(id=${e.id})}"><i class="far fa-edit"></i></a>

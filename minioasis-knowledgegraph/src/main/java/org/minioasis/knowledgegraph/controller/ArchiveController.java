@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.minioasis.knowledgegraph.domain.Archive;
 import org.minioasis.knowledgegraph.domain.Doc;
+import org.minioasis.knowledgegraph.domain.criteria.ArchiveCriteria;
 import org.minioasis.knowledgegraph.domain.criteria.DocCriteria;
 import org.minioasis.knowledgegraph.service.KnowledgeGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,7 @@ public class ArchiveController {
 		}
 	}
 	
+	// add doc
 	@RequestMapping(value = { "/{id}/add.doc" }, method = RequestMethod.GET)
 	public String addRelated(@PathVariable("id") long id, Model model) {
 		
@@ -153,6 +155,72 @@ public class ArchiveController {
 		Archive archive = this.service.findArchiveById(id);
 
 		archive.removeDoc(doc);
+
+		this.service.save(archive);
+
+		return "redirect:/admin/archive/" + archive.getId();
+
+	}
+	
+	// add children archive
+	@RequestMapping(value = { "/{id}/add.children" }, method = RequestMethod.GET)
+	public String addChildren(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("archive", this.service.findArchiveById(id));
+		
+		return "archive.form.add.children";
+		
+	}
+	
+	@RequestMapping(value = { "/{id}/search.children" }, method = RequestMethod.GET)
+	public String searchChildren(@ModelAttribute("criteria") ArchiveCriteria criteria, @PathVariable("id") long id, 
+			Model model, Pageable pageable) {
+
+		Page<Archive> page = this.service.findByCriteria(criteria, pageable);
+
+		model.addAttribute("page", page);
+		model.addAttribute("archive", this.service.findArchiveById(id));
+		
+		return "archive.form.add.children";
+
+	}
+	
+	@RequestMapping(value = { "/add.children" }, method = RequestMethod.POST)
+	public String addChildren(@RequestParam(value = "archiveId", required = true) long archiveId,
+														@RequestParam(value = "childrenId") long childrenId, 
+														@RequestParam(value = "childrenIds", required = false) long [] childrenIds, Model model) {
+
+		Archive archive = this.service.findArchiveById(archiveId);
+		
+		// add multiple childrens
+		if(archiveId > -1 && childrenId == -1 && childrenIds != null &&  childrenIds.length > 0) {
+			
+			for (long id : childrenIds) {
+				Archive children = this.service.findArchiveById(id);
+				archive.addChildren(children);
+			}
+			
+		}
+		
+		// add one children
+		if(archiveId > -1 && childrenId > -1){
+			Archive children = this.service.findArchiveById(childrenId);
+			archive.addChildren(children);
+		}
+
+		this.service.save(archive);
+
+		return "redirect:/admin/archive/" + archive.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/remove.children/{childrenId}" }, method = RequestMethod.GET)
+	public String removeChildren(@PathVariable("id") long id, @PathVariable("childrenId") long childrenId, Model model) {
+
+		Archive archive = this.service.findArchiveById(id);
+		Archive children = this.service.findArchiveById(childrenId);
+
+		archive.removeChildren(children);
 
 		this.service.save(archive);
 

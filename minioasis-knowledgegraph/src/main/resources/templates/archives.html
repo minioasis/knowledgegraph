@@ -42,7 +42,7 @@
 						<th>#</th>
 						<th>Name</th>
 						<th>Archive No</th>
-						<th>Add Doc</th>
+						<th>Add</th>
 						<th>Created/Updated</th>
 						<th>Actions</th>
 					</tr>
@@ -58,6 +58,9 @@
 						</td>
 						<td th:text="${e.archiveNo}">Archive No</td>
 						<td>
+							<a href="#" th:href="@{/admin/archive/{id}/add.children(id=${e.id})}">
+								<i class="fas fa-baby fa-2x text-success"></i>
+							</a> .
 							<a href="#" th:href="@{/admin/archive/{id}/add.doc(id=${e.id})}">
 								<i class="far fa-file-alt fa-2x text-primary"></i>
 							</a>

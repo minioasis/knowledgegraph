@@ -52,6 +52,37 @@
 					</tr>
 					<tr>
 						<td>
+							Children <i class="fas fa-baby fa-lg text-success float-right"></i>
+							<br>
+							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/add.children(id=${archive.id})}">Add</a>
+						</td>
+						<td>
+							<div th:if="${archive.childrens.size() > 0}">
+								<table class="table table-sm table-responsive-sm table-bordered">
+									<tr>
+										<td>No</td>
+										<td>Name</td>
+										<td>Archive No</td>
+										<td>Action</td>
+									</tr>
+									<tr th:each="e,iterator : ${archive.childrens}">
+										<td th:text="${iterator.index + 1}">1</td>
+									    <td>
+									    	<a href="#" th:href="@{/admin/archive/{id}(id=${e.id})}">
+									    		<span th:text="${e.name}">X-files</span>
+									    	</a>
+									    </td>
+									    <td th:text="${e.archiveNo}">00120</td>
+									    <td>
+									    	<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/remove.children/{childrenId}(id=${archive.id},childrenId=${e.id})}">remove</a>
+									    </td>
+									</tr>
+								</table>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
 							Docs <i class="far fa-file-alt fa-lg text-primary float-right"></i>
 							<br>
 							<a class="btn btn-info rounded-pill" href="#" th:href="@{/admin/archive/{id}/add.doc(id=${archive.id})}">Add</a>

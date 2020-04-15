@@ -23,6 +23,9 @@ public class Archive {
 	
 	@Relationship(type = "BELONG_TO", direction = Relationship.INCOMING)
 	private List<Doc> docs = new ArrayList<Doc>();
+	
+	@Relationship(type = "CHILD_OF", direction = Relationship.INCOMING)
+	private List<Archive> childrens = new ArrayList<Archive>();
 
 	public Long getId() {
 		return id;
@@ -73,6 +76,18 @@ public class Archive {
 	public void removeDoc(Doc doc) {
 		this.docs.remove(doc);
 	}
-	
+	// archive
+	public void addChildren(Archive archive) {
+		this.childrens.add(archive);
+	}
+	public List<Archive> getChildrens() {
+		return childrens;
+	}
+	public void setChildrens(List<Archive> childrens) {
+		this.childrens = childrens;
+	}
+	public void removeChildren(Archive archive) {
+		this.childrens.remove(archive);
+	}	
 	
 }
