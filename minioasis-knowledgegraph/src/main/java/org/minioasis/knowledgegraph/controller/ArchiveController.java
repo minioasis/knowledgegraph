@@ -227,4 +227,56 @@ public class ArchiveController {
 		return "redirect:/admin/archive/" + archive.getId();
 
 	}
+	
+	// add parent archive
+	@RequestMapping(value = { "/{id}/add.parent" }, method = RequestMethod.GET)
+	public String addParent(@PathVariable("id") long id, Model model) {
+		
+		model.addAttribute("archive", this.service.findArchiveById(id));
+		
+		return "archive.form.add.parent";
+		
+	}
+	
+	@RequestMapping(value = { "/{id}/search.parent" }, method = RequestMethod.GET)
+	public String searchParent(@ModelAttribute("criteria") ArchiveCriteria criteria, @PathVariable("id") long id, 
+			Model model, Pageable pageable) {
+
+		Page<Archive> page = this.service.findByCriteria(criteria, pageable);
+
+		model.addAttribute("page", page);
+		model.addAttribute("archive", this.service.findArchiveById(id));
+		
+		return "archive.form.add.parent";
+
+	}
+	
+	@RequestMapping(value = { "/add.parent" }, method = RequestMethod.POST)
+	public String addParent(@RequestParam(value = "archiveId", required = true) long archiveId,
+														 @RequestParam(value = "parentId") long parentId, Model model) {
+
+		Archive archive = this.service.findArchiveById(archiveId);
+
+		Archive parent = this.service.findArchiveById(parentId);
+		archive.addParent(parent);
+
+		this.service.save(archive);
+
+		return "redirect:/admin/archive/" + archive.getId();
+
+	}
+	
+	@RequestMapping(value = { "/{id}/remove.parent/{parentId}" }, method = RequestMethod.GET)
+	public String removeParent(@PathVariable("id") long id, @PathVariable("parentId") long parentId, Model model) {
+
+		Archive archive = this.service.findArchiveById(id);
+		Archive parent = this.service.findArchiveById(parentId);
+
+		archive.removeParent(parent);
+
+		this.service.save(archive);
+
+		return "redirect:/admin/archive/" + archive.getId();
+
+	}
 }
