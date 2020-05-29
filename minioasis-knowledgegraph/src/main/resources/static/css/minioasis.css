@@ -1,18 +1,48 @@
-html { font-size: 13px }
+html {
+	font-size: 13px
+}
 
 body {
-  font-family: Microsoft JhengHei;
-  background-color: #f9f9f9;
+	font-family: Microsoft JhengHei;
+	background-color: #f9f9f9;
 }
 
 code {
-    padding: 2px 4px;
-    font-size: 90%;
-    color: #c7254e;
-    background-color: #f9f2f4;
-    border-radius: 4px;
+	padding: 2px 4px;
+	font-size: 90%;
+	color: #c7254e;
+	background-color: #f9f2f4;
+	border-radius: 4px;
 }
 
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-   background-color: #f0faff;
+.table-striped>tbody>tr:nth-child(2n+1)>td, .table-striped>tbody>tr:nth-child(2n+1)>th
+	{
+	background-color: #f0faff;
+}
+
+.btn-circle.btn-sm {
+	width: 15px;
+	height: 15px;
+	padding: 0px 0px;
+	border-radius: 10px;
+	font-size: 8px;
+	text-align: center;
+}
+
+.btn-circle.btn-md {
+	width: 50px;
+	height: 50px;
+	padding: 7px 10px;
+	border-radius: 25px;
+	font-size: 10px;
+	text-align: center;
+}
+
+.btn-circle.btn-xl {
+	width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	border-radius: 35px;
+	font-size: 12px;
+	text-align: center;
 }

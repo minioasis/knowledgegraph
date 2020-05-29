@@ -48,7 +48,10 @@
 						<td>
 							<span th:each="e : ${doc.archives}">
 								<a href="#" th:href="@{/admin/archive/{id}(id=${e.id})}">
-									<span th:text="${e.name}"></span>,
+									<span th:text="${e.name}"></span>
+								</a>
+								<a href="#" th:href="@{/admin/doc/{docId}/remove.archive/{archiveId}(docId=${doc.id},archiveId=${e.id},)}">
+									<button type="button" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-times"></i></button>,
 								</a>
 							</span>		
 						</td>
@@ -62,7 +65,10 @@
 						<td>
 							<span th:each="e : ${doc.catalogs}">
 								<a href="#" th:href="@{/admin/catalog/{id}(id=${e.id})}">
-									<span th:text="${e.name}"></span>,
+									<span th:text="${e.name}"></span>
+								</a>
+								<a href="#" th:href="@{/admin/doc/{docId}/remove.catalog/{catalogId}(docId=${doc.id},catalogId=${e.id},)}">
+									<button type="button" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-times"></i></button>,
 								</a>
 							</span>		
 						</td>
@@ -76,7 +82,10 @@
 						<td>
 							<span th:each="tag : ${doc.tags}">
 								<a href="#" th:href="@{/admin/tag/{id}(id=${tag.id})}">
-									<code th:text="${tag.name}"></code>,
+									<code th:text="${tag.name}"></code>
+								</a>
+								<a href="#" th:href="@{/admin/doc/{docId}/remove.tag/{tagId}(docId=${doc.id},tagId=${tag.id},)}">
+									<button type="button" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-times"></i></button>,
 								</a>
 							</span>		
 						</td>
