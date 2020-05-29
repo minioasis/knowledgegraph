@@ -23,7 +23,7 @@ public class Catalog {
 	@Relationship(type = "CHILD_OF", direction = Relationship.INCOMING)
 	private List<Catalog> childrens = new ArrayList<Catalog>();
 	
-	@Relationship(type = "IN")
+	@Relationship(type = "IN", direction = Relationship.INCOMING)
 	private List<Doc> docs = new ArrayList<Doc>();
 
 	public Long getId() {
